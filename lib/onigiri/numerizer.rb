@@ -22,14 +22,47 @@ module Onigiri
       ['six(\W|$)', '6'],
       ['seven(\W|$)', '7'],
       ['eight(\W|$)', '8'],
-      ['nine(\W|$)', '9ur'],
+      ['nine(\W|$)', '9'],
       ['ten', '10']
+    ]
+
+    TENS_NUMS = [
+      ["ten","10"],
+      ["twenty", "20"],
+      ["thirty", "30"],
+      ["fourty", "40"],
+      ["fifty",  "50"],
+      ["sixty",  "60"],
+      ["seventy","70"],
+      ["eighty", "80"],
+      ["ninety", "90"]
+    ]
+
+    BIG_NUMS = [
+      ["hundred","100"],
+      ["thousand", "1000"]
     ]
 
     def numerize(string)
       DIRECT_NUMS.each do |word, number|
         string.gsub!(/#{word}/i, number)
       end
+
+      #deal with tens numbers such as "twenty two" first.
+      TENS_NUMS.each do |word, number|
+        string.gsub!(/#{word} (\d)/i){ "#{(number.to_i + $1.to_i).to_s}" }
+      end
+
+      #then deal with the simple tens numbers i.e. 20, 30, 40 etc
+      TENS_NUMS.each do |word, number|
+        string.gsub!(/#{word}/i, number)
+      end
+
+      #TODO deal with use of and e.g. one hundred and fifty
+      BIG_NUMS.each do |word, number|
+        string.gsub!(/#{word}/i, number)
+      end
+
       string
     end
   end
