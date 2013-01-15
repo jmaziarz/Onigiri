@@ -58,7 +58,7 @@ module Onigiri
         string.gsub!(/#{word}/i, number)
       end
 
-      #TODO deal with use of and e.g. one hundred and fifty
+      #TODO deal with use of 'and' e.g. one hundred *and* fifty
       BIG_NUMS.each do |word, number|
         string.gsub!(/#{word}/i, number)
       end
