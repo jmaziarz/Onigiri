@@ -18,5 +18,4 @@ class TestToken < MiniTest::Unit::TestCase
     @token.add_tag :scalar
     assert @token.tags.include? :scalar
   end
-
 end
