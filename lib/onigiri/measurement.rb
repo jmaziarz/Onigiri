@@ -1,5 +1,5 @@
 module Onigiri
-  class Measurement
+  class Measurement < Tag
     class << self
       attr_reader :measurements
 

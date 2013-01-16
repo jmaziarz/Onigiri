@@ -1,5 +1,5 @@
 module Onigiri 
-  class Scalar
+  class Scalar < Tag
     class << self
       def scan(tokens)
         tokens.each do |token|

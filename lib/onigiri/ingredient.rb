@@ -1,5 +1,5 @@
 module Onigiri
-  class Ingredient
+  class Ingredient < Tag
     class << self
       attr_reader :ingredients
 

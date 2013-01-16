@@ -6,8 +6,8 @@ module Onigiri
       @name = name
     end
 
-    def add_tag(name)
-      tags.push name.to_sym
+    def add_tag(tag)
+      tags.push tag
     end
 
     def tags
