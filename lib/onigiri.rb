@@ -1,7 +1,7 @@
 require "onigiri/version"
 require 'onigiri/onigiri'
 require 'onigiri/numerizer'
-require 'onigiri/measurementizer'
+require 'onigiri/measurement'
 require 'onigiri/template'
 require 'onigiri/token'
 require 'onigiri/scalar'

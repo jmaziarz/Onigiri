@@ -1,5 +1,5 @@
 module Onigiri
-  class Measurementizer
+  class Measurement
     class << self
       attr_reader :measurements
 
