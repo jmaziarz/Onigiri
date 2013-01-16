@@ -10,10 +10,8 @@ class TestMeasurement < MiniTest::Unit::TestCase
       ["oz", "ounce"]
     ]
 
-    assert_equal "cup", Onigiri::Measurement.normalize('c')
-
     measurement_variations.each do |variation, normalized_form|
-      assert_equal normalized_form, Onigiri::Measurementizer.normalize(variation)
+      assert_equal normalized_form, Onigiri::Measurement.normalize(variation)
     end
   end
 end
