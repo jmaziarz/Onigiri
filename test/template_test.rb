@@ -3,7 +3,7 @@ require 'helper'
 class TestTemplate < MiniTest::Unit::TestCase
 
   def setup 
-    @template = Onigiri::Template.new(:scalar, :measurement)
+    @template = Onigiri::Template.new([:scalar, :measurement], :standard_parser)
     @tok_a = Onigiri::Token.new("10")
     @tok_a.add_tag(:scalar)
     @tok_b = Onigiri::Token.new("grams")
