@@ -42,6 +42,10 @@ module Onigiri
         text.split(" ").map {|segment| Token.new(segment)}
       end
 
+      def select_tagged_only(tokens)
+        tokens.select{|t| !t.tags.empty? }
+      end
+
       def normalize(text)
         text.downcase!
         text.gsub!(/[.,]/, "")

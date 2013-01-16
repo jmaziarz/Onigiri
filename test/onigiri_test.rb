@@ -16,4 +16,11 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal "one", tokens.first.name
     assert_equal "two", tokens.last.name
   end
+
+  def test_selects_tagged_tokens_only
+    tok_a = Onigiri::Token.new("10")
+    tok_a.add_tag(:scalar)
+    tok_b = Onigiri::Token.new("grams")
+    assert_equal [tok_a], Onigiri::Onigiri.select_tagged_only([tok_a, tok_b])
+  end
 end
