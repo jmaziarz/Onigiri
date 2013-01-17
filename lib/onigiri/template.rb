@@ -23,6 +23,12 @@ module Onigiri
     def parse(tokens)
       self.send(parse_method.to_sym, tokens)
     end
+
+    def parse_scalar_ingredient(tokens)
+      result = {}
+      result[:ammount]    = tokens[0].get_tag(Scalar).type
+      result[:ingredient] = tokens[1].get_tag(Ingredient).type
+      result
     end
   end
 end
