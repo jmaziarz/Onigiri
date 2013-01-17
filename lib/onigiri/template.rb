@@ -30,6 +30,14 @@ module Onigiri
       result[:ingredient] = tokens[1].get_tag(Ingredient).type
       result
     end
+
+    def parse_scl_msr_ing(tokens)
+      result = {}
+      result[:ammount]     = tokens[0].get_tag(Scalar).type
+      result[:measurement] = tokens[1].get_tag(Measurement).type
+      result[:ingredient]  = tokens[2].get_tag(Ingredient).type
+      result
+    end
   end
 end
 
