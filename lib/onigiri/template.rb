@@ -1,5 +1,5 @@
 module Onigiri
-  class Template < Tag
+  class Template
     attr_reader :pattern, :parse_method
 
     def initialize(pattern, parse_method)
