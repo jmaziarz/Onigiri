@@ -13,5 +13,9 @@ module Onigiri
     def tags
       @tags ||= []
     end
+
+    def get_tag(class_type)
+      tags.find{|x| x.is_a? class_type}
+    end
   end
 end
