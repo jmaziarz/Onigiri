@@ -21,7 +21,8 @@ module Onigiri
     end
 
     def parse(tokens)
-      self.send(:parse_method, tokens)
+      self.send(parse_method.to_sym, tokens)
+    end
     end
   end
 end
