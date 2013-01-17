@@ -9,6 +9,7 @@ require 'onigiri/template'
 require 'onigiri/scalar'
 require 'onigiri/ingredient'
 
+require 'pry'
 module Onigiri
   # Your code goes here...
 end
