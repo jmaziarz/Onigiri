@@ -25,9 +25,4 @@ class TestTemplate < MiniTest::Unit::TestCase
   def test_template_does_not_make_partial_matches_with_tokens
     refute @template.matches? [@tok_a]
   end
-
-  # def test_parses_token
-  #   template = Onigiri::Template.new(:scalar)
-  #   assert_equal "10", template.parse(@tok_a)
-  # end
 end
