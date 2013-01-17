@@ -9,9 +9,10 @@ class TestIngredient < MiniTest::Unit::TestCase
   end
 
   def test_tags_tokens
-    Onigiri::Ingredient.set_ingredient 'banana'
-    tok_a = Onigiri::Token.new("banana")
-    Onigiri::Ingredient.scan([tok_a])
-    assert_equal true, tok_a.tags.include?(:ingredient)
+    Onigiri::Ingredient.set_ingredient 'banana', 'bazza'
+    tok_a = Onigiri::Token.new("bazza")
+    Onigiri::Ingredient.scan_for_ingredient(tok_a)
+    assert_equal true, tok_a.tags.first.is_a?(Onigiri::Ingredient)
+    assert_equal "banana", tok_a.tags.first.type
   end
 end

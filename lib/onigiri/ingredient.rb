@@ -13,7 +13,7 @@ module Onigiri
         ingredients.each do |correct_form, variations|
           variations.each do |var|
             if token.name == var
-              token.add_tag :ingredient
+              token.add_tag new(correct_form)
               return
             end
           end
