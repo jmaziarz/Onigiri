@@ -8,8 +8,8 @@ module Onigiri
       end
 
       def scan_for_scalar(token)
-        if token.name =~ /\d+/
-          token.add_tag :scalar
+        if token.name =~ /^\d+$/
+          token.add_tag self.new(token.name.to_i)
         end
       end
     end
