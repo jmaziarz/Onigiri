@@ -14,4 +14,10 @@ class TestMeasurement < MiniTest::Unit::TestCase
       assert_equal normalized_form, Onigiri::Measurement.normalize(variation)
     end
   end
+
+  def test_scan_for_measurements_tags_token_with_name
+    token = Onigiri::Token.new("fluid_ounce")
+    Onigiri::Measurement.scan_for_measurement(token)
+    assert_equal "fluid ounce", token.tags.first.type
+  end
 end

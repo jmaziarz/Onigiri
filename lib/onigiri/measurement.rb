@@ -3,6 +3,21 @@ module Onigiri
     class << self
       attr_reader :measurements
 
+      def scan(tokens)
+        tokens.each do |token|
+          scan_for_measurement token
+        end
+      end
+
+      def scan_for_measurement(token)
+        normalized_measurments.each do |measurement|
+          if token.name == measurement
+            name = token.name.gsub('_', ' ') #remove any underscore dashes for multi word ingredients i.e. fluid_ounce => fluid ounce
+            token.add_tag self.new(name)
+          end
+        end
+      end
+
       def normalize(text)
         measurements.each do |variation, normalized_form|
           return text if text.gsub!(/\b#{variation}\b/i, normalized_form)
@@ -15,6 +30,10 @@ module Onigiri
         variations.each do |variation|
           @measurements[variation] = normalized_form
         end
+      end
+
+      def normalized_measurments
+        @normalized_measurments ||= measurements.values.uniq
       end
     end
 
