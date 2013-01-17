@@ -9,14 +9,21 @@ module Onigiri
 
     def matches?(tokens)
       index = 0;
+      tagged_count = 0;
       tokens.each do |token|
-        if (pattern[index] and token.tags.include?(pattern[index]))
+        break if index == pattern.size
+        tagger_name = pattern[index]
+        klass = constantize(tagger_name)
+        if token.get_tag(klass)
+          tagged_count += 1
           index += 1 
         end
       end
 
       #if the entire pattern matched, the index should equal the pattern size.
       return false if index != pattern.size
+      #if all the tokens matched...
+      return false if tagged_count != tokens.size
       return true
     end
 
@@ -37,6 +44,10 @@ module Onigiri
       result[:measurement] = tokens[1].get_tag(Measurement).type
       result[:ingredient]  = tokens[2].get_tag(Ingredient).type
       result
+    end
+
+    def constantize(klass_name)
+      ::Onigiri.const_get klass_name.to_s.capitalize
     end
   end
 end
