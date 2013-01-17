@@ -1,7 +1,7 @@
 module Onigiri
   class Ingredient < Tag
     class << self
-      attr_reader :ingredients
+      attr_accessor :ingredients
 
       def scan(tokens)
         tokens.each do |token|

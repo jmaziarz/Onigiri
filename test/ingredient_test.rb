@@ -2,10 +2,6 @@ require 'helper'
 
 
 class TestIngredient < MiniTest::Unit::TestCase
-  def setup 
-    # Onigiri::Ingredient.ingredients = {}
-  end
-
   def test_sets_ingredient
     Onigiri::Ingredient.set_ingredient 'banana', 'bananaz'
     assert Onigiri::Ingredient.ingredients.has_key? 'banana'

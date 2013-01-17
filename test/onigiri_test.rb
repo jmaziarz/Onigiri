@@ -25,6 +25,7 @@ class TestOnigiri < MiniTest::Unit::TestCase
   end
 
   def test_parsing
+    Onigiri::Ingredient.set_ingredient 'banana'
     expected = {:ammount => 10, :ingredient => 'banana', :measurement => 'pound'}
     ["10 lbs of banana"].each do |text|
       result = Onigiri::Onigiri.parse(text)
