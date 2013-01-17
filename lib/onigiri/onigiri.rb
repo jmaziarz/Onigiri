@@ -2,40 +2,41 @@ module Onigiri
   class Onigiri
     class << self
       def parse(text)
-
-        # tokens = tokenize(text)
-        # [Tags].each do |tag|
-        #   tag.tag(tokens)
-        # end
-
         normalized_text = normalize(text)
 
         tokens = tokenize(normalized_text)
 
+        taggers.each do |tagger|
+          tagger.scan(tokens)
+        end
 
+        tokens = select_tagged_only(tokens) 
 
+        matching_template = nil
         templates.each do |template|
           if template.matches? tokens
-            result = Parser.send template.parse_method, tokens
-          else 
-            next
+            matching_template = template
+            break
           end
+        end
+
+        if matching_template
+          return matching_template.parse(tokens)
+        else
+          return {:status => "Nothing Matched"}
         end
       end
 
 
       def templates
-        # @templates ||= [
-        #   Template.new(:scalar, :measurement, :ingredient_description)
-        #   Template.new(:fraction, :measurement, :ingredient_description)
-        #   Template.new(:float, :measurement, :ingredient_description)
-        #   Template.new(:ingredient_description, :seperator, :scalar)
-        #   Template.new(:ingredient_description, :seperator, :fraction)
-        #   Template.new(:scalar, :measurement, :ingredient_description)
-        #   Template.new(:scalar, :measurement, :ingredient_description)
+        @templates ||= [
+          Template.new([:scalar, :ingredient], :parse_scalar_ingredient),
+          Template.new([:scalar, :measurement, :ingredient], :parse_scl_msr_ing)
+        ]
+      end
 
-        # ]
-
+      def taggers
+        @taggers ||= [Scalar, Measurement, Ingredient]
       end
 
       def tokenize(text)
@@ -46,9 +47,11 @@ module Onigiri
         tokens.select{|t| !t.tags.empty? }
       end
 
-      def normalize(text)
+      def normalize(str)
+        text = str.dup
         text.downcase!
         text.gsub!(/[.,]/, "")
+        text = Measurement.normalize(text)
         text
       end
     end
