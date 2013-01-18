@@ -1,7 +1,5 @@
 module Onigiri
   class Ingredient < Tag
-
-
     class << self
       attr_accessor :ingredients
 
@@ -21,7 +19,7 @@ module Onigiri
           end
         end
       end
-      
+
       # Checkes given text for any multi word ingredients and replaces them
       # with the dasherized correct form i.e. cherry tomato => cherry_tomato
       # This prevents such an ingredient being spliced into multiple tokens 
