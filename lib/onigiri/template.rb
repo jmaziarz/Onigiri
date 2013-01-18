@@ -46,6 +46,45 @@ module Onigiri
       result
     end
 
+    #3 tbsp unsweetened applesauce
+    def parse_scl_msr_mod_ing(tokens)
+      result = {}
+      result[:ammount]     = tokens[0].get_tag(Scalar).type
+      result[:measurement] = tokens[1].get_tag(Measurement).type
+      result[:modifier]    = tokens[2].get_tag(Modifier).type
+      result[:ingredient]  = tokens[3].get_tag(Ingredient).type
+      result
+    end
+
+    # 15 g  goat cheese, crumbled
+    def parse_scl_msr_ing_mod(tokens)
+      result = {}
+      result[:ammount]     = tokens[0].get_tag(Scalar).type
+      result[:measurement] = tokens[1].get_tag(Measurement).type
+      result[:ingredient]  = tokens[2].get_tag(Ingredient).type
+      result[:modifier]    = tokens[3].get_tag(Modifier).type
+      result
+    end
+
+    # banana chopped
+    def parse_ing_mod(tokens)
+      result = {}
+      result[:modifier]    = tokens[0].get_tag(Modifier).type
+      result[:ingredient]  = tokens[1].get_tag(Ingredient).type
+      result[:ammount]     = 1
+      result
+    end
+
+    # chopped banana
+    def parse_mod_ing(tokens)
+      result = {}
+      result[:ingredient]  = tokens[0].get_tag(Ingredient).type
+      result[:modifier]    = tokens[1].get_tag(Modifier).type
+      result[:ammount]     = 1
+      result
+    end
+
+
     def constantize(klass_name)
       ::Onigiri.const_get klass_name.to_s.capitalize
     end
