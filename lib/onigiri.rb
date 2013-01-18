@@ -8,6 +8,7 @@ require 'onigiri/measurement'
 require 'onigiri/template'
 require 'onigiri/scalar'
 require 'onigiri/ingredient'
+require 'onigiri/modifier'
 
 require 'pry'
 module Onigiri
