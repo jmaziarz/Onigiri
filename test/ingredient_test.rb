@@ -10,14 +10,7 @@ class TestIngredient < MiniTest::Unit::TestCase
 
   def test_sets_ingredients_of_multiple_words
     Onigiri::Ingredient.set_ingredient 'cherry tomato'
-    assert Onigiri::Ingredient.ingredients.has_key? 'cherry_tomato'
-  end
-
-  def test_returns_only_multi_word_ingredients
-    Onigiri::Ingredient.set_ingredient 'cherry tomato'
-    Onigiri::Ingredient.set_ingredient 'banana'
-    assert Onigiri::Ingredient.multi_word_ingredients.has_key?'cherry_tomato'
-    refute Onigiri::Ingredient.multi_word_ingredients.has_key?'banana'
+    assert Onigiri::Ingredient.ingredients.has_key? 'cherry tomato'
   end
 
   def test_underscores_multi_word_ingredients_to_normalize
