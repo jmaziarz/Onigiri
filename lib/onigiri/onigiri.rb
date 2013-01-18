@@ -52,6 +52,7 @@ module Onigiri
         text.downcase!
         text.gsub!(/[.,]/, "")
         text = Measurement.normalize(text)
+        text = Ingredient.normalize(text)
         text
       end
     end

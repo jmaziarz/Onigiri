@@ -24,14 +24,23 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal [tok_a], Onigiri::Onigiri.select_tagged_only([tok_a, tok_b])
   end
 
-  def test_parsing
-    Onigiri::Ingredient.set_ingredient 'banana'
-    expected = {:ammount => 10, :ingredient => 'banana', :measurement => 'pound'}
-    ["10 lbs of banana"].each do |text|
-      result = Onigiri::Onigiri.parse(text)
-      assert_equal(expected[:ammount],      result[:ammount])
-      assert_equal(expected[:ingredient],   result[:ingredient])
-      assert_equal(expected[:measurement],  result[:measurement])
-    end
+  def test_parsing_from_text_scl_msr_ing
+    Onigiri::Ingredient.set_ingredient 'cherry tomato'
+    text = "10 lbs of cherry tomato"
+    expected = {:ammount => 10, :ingredient => 'cherry tomato', :measurement => 'pound'}
+    result = Onigiri::Onigiri.parse(text)
+    assert_equal(expected[:ammount],      result[:ammount])
+    assert_equal(expected[:ingredient],   result[:ingredient])
+    assert_equal(expected[:measurement],  result[:measurement])
+  end
+
+  def test_parsing_from_text_including_ingredient_variation
+    Onigiri::Ingredient.set_ingredient 'dijon mustard', 'dijjon'
+    text = "1 tbsp Dijjon mustard"
+    expected = {:ammount => 1, :ingredient => 'dijon mustard', :measurement => 'tablespoon'}
+    result = Onigiri::Onigiri.parse(text)
+    assert_equal(expected[:ammount],      result[:ammount])
+    assert_equal(expected[:ingredient],   result[:ingredient])
+    assert_equal(expected[:measurement],  result[:measurement])
   end
 end
