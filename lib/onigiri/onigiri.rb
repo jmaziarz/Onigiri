@@ -46,7 +46,7 @@ module Onigiri
       end
 
       def taggers
-        @taggers ||= [Scalar, Measurement, Ingredient]
+        @taggers ||= [Scalar, Measurement, Ingredient, Modifier]
       end
 
       def tokenize(text)
