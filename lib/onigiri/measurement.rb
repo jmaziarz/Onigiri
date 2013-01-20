@@ -27,6 +27,7 @@ module Onigiri
 
       def set_measurement(normalized_form, *variations)
         @measurements ||={}
+        @measurements[normalized_form] = normalized_form
         variations.each do |variation|
           @measurements[variation] = normalized_form
         end
