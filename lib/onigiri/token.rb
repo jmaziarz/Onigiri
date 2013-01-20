@@ -17,5 +17,9 @@ module Onigiri
     def get_tag(class_type)
       tags.find{|x| x.is_a? class_type}
     end
+
+    def has_tag?(class_type)
+      get_tag(class_type) ? true : false
+    end
   end
 end
