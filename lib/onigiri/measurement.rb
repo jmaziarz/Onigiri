@@ -11,16 +11,15 @@ module Onigiri
 
       def scan_for_measurement(token)
         normalized_measurements.each do |measurement|
-          if token.name == measurement
-            name = token.name.gsub('_', ' ') #remove any underscore dashes for multi word ingredients i.e. fluid_ounce => fluid ounce
-            token.add_tag self.new(name)
+          if token.name == measurement            
+            token.add_tag self.new(token.name)
           end
         end
       end
 
       def normalize(text)
         measurements.each do |variation, normalized_form|
-          return text if text.gsub!(/\b#{variation}\b/i, normalized_form)
+          text.gsub!(/\b#{variation}\b/i, normalized_form.gsub(" ", "_"))
         end
         text
       end

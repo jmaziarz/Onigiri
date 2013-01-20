@@ -11,7 +11,7 @@ module Onigiri
 
       def scan_for_modifier(token)
         modifiers.each do |variation, normalized_form| 
-          token.add_tag(self.new(normalized_form)) if token.name.gsub("_", " ") == variation
+          token.add_tag(self.new(normalized_form)) if token.name == variation
         end
 
       end
