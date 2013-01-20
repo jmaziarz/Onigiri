@@ -1,7 +1,7 @@
 module Onigiri
   class Measurement < Tag
     class << self
-      attr_reader :measurements
+      attr_accessor :measurements
 
       def scan(tokens)
         tokens.each do |token|
