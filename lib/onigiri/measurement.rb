@@ -10,7 +10,7 @@ module Onigiri
       end
 
       def scan_for_measurement(token)
-        normalized_measurments.each do |measurement|
+        normalized_measurements.each do |measurement|
           if token.name == measurement
             name = token.name.gsub('_', ' ') #remove any underscore dashes for multi word ingredients i.e. fluid_ounce => fluid ounce
             token.add_tag self.new(name)
@@ -32,8 +32,8 @@ module Onigiri
         end
       end
 
-      def normalized_measurments
-        @normalized_measurments ||= measurements.values.uniq
+      def normalized_measurements
+        @normalized_measurements ||= measurements.values.uniq
       end
     end
 
