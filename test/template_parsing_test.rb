@@ -1,6 +1,11 @@
 require 'helper'
 
 class TestTemplateParsing < MiniTest::Unit::TestCase
+
+  def setup
+
+  end
+
   def test_scalar_ingredient_parser 
     template = Onigiri::Template.new([:scalar, :ingredient], :parse_scalar_ingredient)
 
@@ -13,11 +18,11 @@ class TestTemplateParsing < MiniTest::Unit::TestCase
     assert_equal({:ammount => 10, :ingredient => 'banana'}, template.parse([tok_a, tok_b]))
   end
 
-  def test_scalar_measurement_ingredient_parser
-    template = Onigiri::Template.new([:scalar, :measurement, :ingredient], :parse_scl_msr_ing)
+  def test_sclmsr_msr_ing
+    template = Onigiri::Template.new([:scalar_measurment, :measurement, :ingredient], :parse_sclmsr_msr_ing)
     
     scl = Onigiri::Token.new("10")
-    scl.add_tag(Onigiri::Scalar.new(10))
+    scl.add_tag(Onigiri::ScalarMeasurement.new(10))
 
     ing = Onigiri::Token.new("banana")
     ing.add_tag(Onigiri::Ingredient.new('banana'))
@@ -30,11 +35,11 @@ class TestTemplateParsing < MiniTest::Unit::TestCase
   end
   
   #3 tbsp unsweetened applesauce
-  def test_scl_msr_mod_ing
-    template = Onigiri::Template.new([:scalar, :measurement, :modifier, :ingredient], :parse_scl_msr_mod_ing)
+  def test_sclmsr_msr_mod_ing
+    template = Onigiri::Template.new([:scalar, :measurement, :modifier, :ingredient], :parse_sclmsr_msr_mod_ing)
     
     scl = Onigiri::Token.new("10")
-    scl.add_tag(Onigiri::Scalar.new(10))
+    scl.add_tag(Onigiri::ScalarMeasurement.new(10))
 
     mod = Onigiri::Token.new("unsweetned")
     mod.add_tag(Onigiri::Modifier.new("unsweetned"))
@@ -50,11 +55,11 @@ class TestTemplateParsing < MiniTest::Unit::TestCase
   end
 
   #15 g  goat cheese, crumbled
-  def test_scl_msr_ing_mod
-    template = Onigiri::Template.new([:scalar, :measurement, :ingredient, :modifier], :parse_scl_msr_ing_mod)
+  def test_sclmsr_msr_ing_mod
+    template = Onigiri::Template.new([:scalar, :measurement, :ingredient, :modifier], :parse_sclmsr_msr_ing_mod)
     
     scl = Onigiri::Token.new("10")
-    scl.add_tag(Onigiri::Scalar.new(10))
+    scl.add_tag(Onigiri::ScalarMeasurement.new(10))
 
     mod = Onigiri::Token.new("unsweetned")
     mod.add_tag(Onigiri::Modifier.new("unsweetned"))
@@ -95,5 +100,7 @@ class TestTemplateParsing < MiniTest::Unit::TestCase
     expected_result = {:ammount => 1, :ingredient => 'banana', :modifier => 'unsweetned'}
     assert_equal expected_result, template.parse([mod, ing])
   end
+
+  
 end
 

@@ -38,18 +38,18 @@ module Onigiri
       result
     end
 
-    def parse_scl_msr_ing(tokens)
+    def parse_sclmsr_msr_ing(tokens)
       result = {}
-      result[:ammount]     = tokens[0].get_tag(Scalar).type
+      result[:ammount]     = tokens[0].get_tag(ScalarMeasurement).type
       result[:measurement] = tokens[1].get_tag(Measurement).type
       result[:ingredient]  = tokens[2].get_tag(Ingredient).type
       result
     end
 
     #3 tbsp unsweetened applesauce
-    def parse_scl_msr_mod_ing(tokens)
+    def parse_sclmsr_msr_mod_ing(tokens)
       result = {}
-      result[:ammount]     = tokens[0].get_tag(Scalar).type
+      result[:ammount]     = tokens[0].get_tag(ScalarMeasurement).type
       result[:measurement] = tokens[1].get_tag(Measurement).type
       result[:modifier]    = tokens[2].get_tag(Modifier).type
       result[:ingredient]  = tokens[3].get_tag(Ingredient).type
@@ -57,9 +57,9 @@ module Onigiri
     end
 
     # 15 g  goat cheese, crumbled
-    def parse_scl_msr_ing_mod(tokens)
+    def parse_sclmsr_msr_ing_mod(tokens)
       result = {}
-      result[:ammount]     = tokens[0].get_tag(Scalar).type
+      result[:ammount]     = tokens[0].get_tag(ScalarMeasurement).type
       result[:measurement] = tokens[1].get_tag(Measurement).type
       result[:ingredient]  = tokens[2].get_tag(Ingredient).type
       result[:modifier]    = tokens[3].get_tag(Modifier).type
@@ -86,7 +86,8 @@ module Onigiri
 
 
     def constantize(klass_name)
-      ::Onigiri.const_get klass_name.to_s.capitalize
+      camel = klass_name.to_s.gsub(/(^|_)(.)/) { $2.upcase }
+      ::Onigiri.const_get camel
     end
   end
 end

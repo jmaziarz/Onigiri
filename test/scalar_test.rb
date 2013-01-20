@@ -5,10 +5,11 @@ class TestScalar < MiniTest::Unit::TestCase
     
   end
 
-  def test_adds_scalar_tag_to_token
-    token = Onigiri::Token.new("150")  
-    Onigiri::Scalar.scan_for_scalar(token)
-    assert token.tags.first.is_a? Onigiri::Scalar
-    assert_equal 150, token.tags.first.type 
+  def test_adds_measurment_scalar_tag_to_token
+    scl_tok = Onigiri::Token.new("150")  
+    msr_tok = Onigiri::Token.new("pound")  
+    Onigiri::Scalar.scan_for_measurement(scl_tok, msr_tok)
+    tag = scl_tok.get_tag(Onigiri::ScalarMeasurement)
+    assert_equal 150, tag.type 
   end
 end

@@ -24,7 +24,7 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal [tok_a], Onigiri::Onigiri.select_tagged_only([tok_a, tok_b])
   end
 
-  def test_parsing_from_text_scl_msr_ing
+  def test_parsing_from_text_sclmsr_msr_ing
     Onigiri::Ingredient.set_ingredient 'cherry tomato'
     text = "10 lbs of cherry tomato"
     expected = {:ammount => 10, :ingredient => 'cherry tomato', :measurement => 'pound'}
@@ -38,6 +38,15 @@ class TestOnigiri < MiniTest::Unit::TestCase
     Onigiri::Ingredient.set_ingredient 'dijon mustard', 'dijjon'
     text = "1 tbsp Dijjon mustard"
     expected = {:ammount => 1, :ingredient => 'dijon mustard', :measurement => 'tablespoon'}
+    result = Onigiri::Onigiri.parse(text)
+    assert_equal(expected[:ammount],      result[:ammount])
+    assert_equal(expected[:ingredient],   result[:ingredient])
+    assert_equal(expected[:measurement],  result[:measurement])
+  end
+
+  def test_parsing_sclmsr_msr_ing
+    text = "1 tbsp honey"
+    expected = {:ammount => 1, :ingredient => 'honey', :measurement => 'tablespoon'}
     result = Onigiri::Onigiri.parse(text)
     assert_equal(expected[:ammount],      result[:ammount])
     assert_equal(expected[:ingredient],   result[:ingredient])
