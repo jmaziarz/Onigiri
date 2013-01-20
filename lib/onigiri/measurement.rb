@@ -40,7 +40,7 @@ module Onigiri
 
     # english units
     set_measurement "cup", "c", "cup", "cups"
-    set_measurement "fluid_ounce", "fl. oz.", "fl oz", "fluid ounce", "fluid ounces"
+    set_measurement "fluid ounce", "fl. oz.", "fl oz", "fluid ounce", "fluid ounces"
     set_measurement "gallon", "gal", "gallon", "gallons"
     set_measurement "ounce", "oz", "ounce", "ounces"
     set_measurement "pint", "pt", "pint", "pints"
@@ -48,6 +48,8 @@ module Onigiri
     set_measurement "quart", "qt", "qts", "quart", "quarts"
     set_measurement "tablespoon", "tbsp", "T", "tablespoon", "tablespoons"
     set_measurement "teaspoon", "tsp", "t", "teaspoon", "teaspoons"
+    set_measurement '15 ounce can', '15-?ounce cans?'
+    set_measurement "9 ounce can", '9-?ounce cans?'
     # metric units
     set_measurement "gram", "g", "g.", "gr", "gr.", "gram", "grams"
     set_measurement "kilogram", "kg", "kilogram", "kilograms"
