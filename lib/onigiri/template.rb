@@ -69,8 +69,8 @@ module Onigiri
     # banana chopped
     def parse_ing_mod(tokens)
       result = {}
-      result[:modifier]    = tokens[0].get_tag(Modifier).type
-      result[:ingredient]  = tokens[1].get_tag(Ingredient).type
+      result[:ingredient]  = tokens[0].get_tag(Ingredient).type
+      result[:modifier]    = tokens[1].get_tag(Modifier).type
       result[:ammount]     = 1
       result
     end
@@ -78,8 +78,8 @@ module Onigiri
     # chopped banana
     def parse_mod_ing(tokens)
       result = {}
-      result[:ingredient]  = tokens[0].get_tag(Ingredient).type
-      result[:modifier]    = tokens[1].get_tag(Modifier).type
+      result[:modifier]    = tokens[0].get_tag(Modifier).type
+      result[:ingredient]  = tokens[1].get_tag(Ingredient).type
       result[:ammount]     = 1
       result
     end

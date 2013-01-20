@@ -80,7 +80,7 @@ class TestTemplateParsing < MiniTest::Unit::TestCase
     ing.add_tag(Onigiri::Ingredient.new('banana'))
 
     expected_result = {:ammount => 1, :ingredient => 'banana', :modifier => 'unsweetned'}
-    assert_equal expected_result, template.parse([mod, ing])
+    assert_equal expected_result, template.parse([ing, mod])
   end
 
   def test_mod_ing
@@ -93,7 +93,7 @@ class TestTemplateParsing < MiniTest::Unit::TestCase
     ing.add_tag(Onigiri::Ingredient.new('banana'))
 
     expected_result = {:ammount => 1, :ingredient => 'banana', :modifier => 'unsweetned'}
-    assert_equal expected_result, template.parse([ing, mod])
+    assert_equal expected_result, template.parse([mod, ing])
   end
 end
 

@@ -30,6 +30,7 @@ module Onigiri
 
       def templates
         @templates ||= [
+          Template.new([:modifier, :ingredient], :parse_mod_ing),
           Template.new([:ingredient, :modifier], :parse_ing_mod),
           Template.new([:scalar, :ingredient], :parse_scalar_ingredient),
           Template.new([:scalar, :measurement, :ingredient], :parse_scl_msr_ing),
