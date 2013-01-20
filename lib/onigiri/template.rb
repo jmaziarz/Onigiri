@@ -9,21 +9,20 @@ module Onigiri
 
     def matches?(tokens)
       index = 0;
-      tagged_count = 0;
-      tokens.each do |token|
-        break if index == pattern.size
+      matched = 0;
+      pattern.each do |element|
         tagger_name = pattern[index]
-        klass = constantize(tagger_name)
-        if token.get_tag(klass)
-          tagged_count += 1
-          index += 1 
+        klass = constantize(element)
+        if tokens[index] && tokens[index].has_tag?(klass)
+          index += 1; next 
+        else
+          return false
         end
       end
 
       #if the entire pattern matched, the index should equal the pattern size.
       return false if index != pattern.size
       #if all the tokens matched...
-      return false if tagged_count != tokens.size
       return true
     end
 
@@ -83,6 +82,8 @@ module Onigiri
       result[:ammount]     = 1
       result
     end
+
+
 
 
     def constantize(klass_name)
