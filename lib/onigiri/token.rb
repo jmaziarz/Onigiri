@@ -3,7 +3,7 @@ module Onigiri
     attr_accessor :name, :tags
 
     def initialize(name)
-      @name = name
+      @name = name.gsub("_", " ")
     end
 
     def add_tag(tag)
