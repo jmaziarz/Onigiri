@@ -12,5 +12,10 @@ require 'onigiri/modifier'
 
 require 'pry'
 module Onigiri
+  class << self
+    attr_accessor :debug
+  end
+  
+  self.debug = true
   # Your code goes here...
 end

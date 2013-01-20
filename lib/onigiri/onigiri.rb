@@ -20,6 +20,12 @@ module Onigiri
           end
         end
 
+        if ::Onigiri.debug
+          puts "+---------------------------------------------------"
+          tokens.map{|t| puts t.inspect.to_s + "\n"}
+          puts "+---------------------------------------------------"
+        end
+
         if matching_template
           return matching_template.parse(tokens)
         else
