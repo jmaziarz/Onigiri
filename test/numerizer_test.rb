@@ -2,7 +2,6 @@ require 'helper'
 
 class TestNumerizer < MiniTest::Unit::TestCase
   def setup
-    
   end
 
   def test_converts_direct_numbers
@@ -46,5 +45,22 @@ class TestNumerizer < MiniTest::Unit::TestCase
     complex_numbers_in_tens.each do |word, number|
       assert_equal number, Onigiri::Numerizer.numerize(word)
     end
+  end
+
+  def test_converts_fractions_to_decimal 
+    fractions = [
+      ["1/2", "0.5"],
+      ["1/3", "0.33"],
+      ["1/4", "0.25"],
+      ["1 1/2", "1.5"],
+      ["10 1/4", "10.25"]
+    ]
+
+    fractions.each do |fraction, decimal|
+      assert_equal decimal, Onigiri::Numerizer.numerize(fraction)
+    end
+
+
+
   end
 end
