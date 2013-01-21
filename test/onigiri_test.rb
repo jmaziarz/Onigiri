@@ -45,8 +45,8 @@ class TestOnigiri < MiniTest::Unit::TestCase
   end
 
   def test_parsing_sclmsr_msr_ing
-    text = "1 tbsp honey"
-    expected = {:ammount => 1, :ingredient => 'honey', :measurement => 'tablespoon'}
+    text = "1 1/2 tbsp honey"
+    expected = {:ammount => 1.5, :ingredient => 'honey', :measurement => 'tablespoon'}
     result = Onigiri::Onigiri.parse(text)
     assert_equal(expected[:ammount],      result[:ammount])
     assert_equal(expected[:ingredient],   result[:ingredient])
