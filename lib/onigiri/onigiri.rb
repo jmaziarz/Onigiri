@@ -59,7 +59,8 @@ module Onigiri
       def normalize(str)
         text = str.dup
         text.downcase!
-        text.gsub!(/[.,]/, "")
+        text.gsub!(/[.,]/, '')
+        text.gsub!(/\(.*?\)/, '')
         text = Measurement.normalize(text)
         text = Ingredient.normalize(text)
         text = Modifier.normalize(text)
