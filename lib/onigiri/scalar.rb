@@ -9,14 +9,14 @@ module Onigiri
       end
 
       def scan_for_scalar(token, next_token)
-        if token.name =~ /^\d+$/
-          token.add_tag self.new(token.name.to_i)
+        if token.name =~ /^\d+\.?\d*?$/
+          token.add_tag self.new(token.name.to_f)
         end
       end
 
       def scan_for_measurement(token, next_token)
-        if (token.name =~ /^\d+$/ && Measurement.normalized_measurements.include?(next_token.name))
-          token.add_tag ScalarMeasurement.new(token.name.to_i)
+        if (token.name =~ /^\d+\.?\d*?$/ && Measurement.normalized_measurements.include?(next_token.name))
+          token.add_tag ScalarMeasurement.new(token.name.to_f)
         end
       end
     end
