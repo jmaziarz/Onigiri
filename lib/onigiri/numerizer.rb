@@ -50,7 +50,7 @@ module Onigiri
       string.gsub!(/(\d\d?) (\d\.\d\d?\d?\d?)/) { ($1.to_f + $2.to_f).round(2).to_s }
 
       DIRECT_NUMS.each do |word, number|
-        string.gsub!(/#{word}/i, number)
+        string.gsub!(/\b#{word}\b/i, number)
       end
 
       #deal with tens numbers such as "twenty two" first.
@@ -60,12 +60,12 @@ module Onigiri
 
       #then deal with the simple tens numbers i.e. 20, 30, 40 etc
       TENS_NUMS.each do |word, number|
-        string.gsub!(/#{word}/i, number)
+        string.gsub!(/\b#{word}\b/i, number)
       end
 
       #TODO deal with use of 'and' e.g. one hundred *and* fifty
       BIG_NUMS.each do |word, number|
-        string.gsub!(/#{word}/i, number)
+        string.gsub!(/\b#{word}\b/i, number)
       end
 
       string
