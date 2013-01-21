@@ -1,10 +1,9 @@
 module Onigiri
   class Template
-    attr_reader :pattern, :parse_method
+    attr_reader :pattern
 
-    def initialize(pattern, parse_method)
+    def initialize(pattern)
       @pattern      = pattern
-      @parse_method = parse_method
     end
 
     def matches?(tokens)

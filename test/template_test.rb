@@ -2,7 +2,7 @@ require 'helper'
 
 class TestTemplate < MiniTest::Unit::TestCase
   def setup 
-    @template = Onigiri::Template.new([:scalar_measurement, :measurement], :some_parser)
+    @template = Onigiri::Template.new([:scalar_measurement, :measurement])
     @tok_a = Onigiri::Token.new("10")
     @tag_a = Onigiri::ScalarMeasurement.new(10)
     @tok_a.add_tag(@tag_a)
@@ -29,8 +29,8 @@ class TestTemplate < MiniTest::Unit::TestCase
   end
 
   def test_template_match_allows_optional_pattern_elements_to_not_match
-    not_optional = Onigiri::Template.new([:scalar_measurement, :ingredient, :measurement], :some_parser)
-    optional     = Onigiri::Template.new([:scalar_measurement, :ingredient?, :measurement], :some_parser)
+    not_optional = Onigiri::Template.new([:scalar_measurement, :ingredient, :measurement])
+    optional     = Onigiri::Template.new([:scalar_measurement, :ingredient?, :measurement])
     assert optional.matches?([@tok_a, @tok_b])
     refute not_optional.matches?([@tok_a, @tok_b])
   end
