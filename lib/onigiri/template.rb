@@ -9,19 +9,27 @@ module Onigiri
 
     def matches?(tokens)
       index = 0;
-      matched = 0;
       pattern.each do |element|
-        tagger_name = pattern[index]
-        klass = constantize(element)
-        if tokens[index] && tokens[index].has_tag?(klass)
-          index += 1; next 
-        else
-          return false
-        end
+        tagger_name = element.to_s
+        optional    = (tagger_name.reverse[0..0] == '?')
+        tagger_name = tagger_name.chop if optional
+        klass = constantize(tagger_name)
+        match = (tokens[index] and tokens[index].has_tag?(klass))
+
+        #not optional
+        #match - next token, next element
+        #no match - return false
+
+        #optional
+        #match - next token, next element
+        #no match - next element.        
+        return false  if (!match and !optional)
+        next          if (optional and !match)
+        index += 1; next if match
       end
 
       #if the entire pattern matched, the index should equal the pattern size.
-      return false if index != pattern.size
+      return false if index != tokens.size
       #if all the tokens matched...
       return true
     end

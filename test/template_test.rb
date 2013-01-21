@@ -25,4 +25,11 @@ class TestTemplate < MiniTest::Unit::TestCase
   def test_template_match_fails_if_unmatched_pattern_parts_exist
     refute @template.matches? [@tok_a]
   end
+
+  def test_template_match_allows_optional_pattern_elements_to_not_match
+    not_optional = Onigiri::Template.new([:scalar_measurement, :ingredient, :measurement], :some_parser)
+    optional     = Onigiri::Template.new([:scalar_measurement, :ingredient?, :measurement], :some_parser)
+    assert optional.matches?([@tok_a, @tok_b])
+    refute not_optional.matches?([@tok_a, @tok_b])
+  end
 end
