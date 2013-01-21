@@ -21,5 +21,11 @@ module Onigiri
     def has_tag?(class_type)
       get_tag(class_type) ? true : false
     end
+
+    def to_s
+      str = "name: #{name} | "
+      str << tags.each {|t| t.to_s }.join(" - ")
+      str
+    end
   end
 end

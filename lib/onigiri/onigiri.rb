@@ -21,9 +21,12 @@ module Onigiri
         end
 
         if ::Onigiri.debug
-          puts "+---------------------------------------------------"
-          tokens.map{|t| puts t.inspect.to_s + "\n"}
-          puts "+---------------------------------------------------"
+
+          puts "\n+---------------------------------------------------"
+          puts "text: #{text}"
+          puts "norm: #{normalized_text}"
+          tokens.map{|t| puts t.to_s}
+          puts "+---------------------------------------------------\n"
         end
 
         if matching_template
