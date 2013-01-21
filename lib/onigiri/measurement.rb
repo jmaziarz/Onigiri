@@ -56,6 +56,7 @@ module Onigiri
     set_measurement "milligram", "mg", "mg.", "milligram", "milligrams"
     set_measurement "milliliter", "ml", "ml.", "milliliter", "milliliters"
 
+    # random units for veg n stuff
     set_measurement "clove", "cloves"
     set_measurement "head"
 
