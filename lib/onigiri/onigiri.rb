@@ -12,16 +12,12 @@ module Onigiri
 
         tokens = select_tagged_only(tokens) 
 
-        matching_template = nil
+        matchset = nil
         templates.each do |template|
-          if template.matches? tokens
-            matching_template = template
-            break
-          end
+          break if (matchset = template.matches? tokens)
         end
 
         if ::Onigiri.debug
-
           puts "\n+---------------------------------------------------"
           puts "text: #{text}"
           puts "norm: #{normalized_text}"
@@ -29,8 +25,8 @@ module Onigiri
           puts "+---------------------------------------------------\n"
         end
 
-        if matching_template
-          return matching_template.parse(tokens)
+        if matchset
+          return matchset.result
         else
           return {:status => "Nothing Matched"}
         end

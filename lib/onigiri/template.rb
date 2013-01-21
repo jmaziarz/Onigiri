@@ -8,6 +8,7 @@ module Onigiri
     end
 
     def matches?(tokens)
+      matchset = MatchSet.new()
       index = 0;
       pattern.each do |element|
         tagger_name = element.to_s
@@ -24,79 +25,69 @@ module Onigiri
         #match - next token, next element
         #no match - next element.        
         return false  if (!match and !optional)
-        next          if (optional and !match)
-        index += 1; next if match
+        if (optional and !match)
+          matchset << tokens[index].get_tag(klass)
+          next
+        end
+        if match
+          matchset << tokens[index].get_tag(klass);
+          index += 1; 
+          next; 
+        end
       end
 
       #if the entire pattern matched, the index should equal the pattern size.
       return false if index != tokens.size
       #if all the tokens matched...
-      return true
+      return matchset
     end
-
-    def parse(tokens)
-      self.send(parse_method.to_sym, tokens)
-    end
-
-    def parse_scalar_ingredient(tokens)
-      result = {}
-      result[:ammount]    = tokens[0].get_tag(Scalar).type
-      result[:ingredient] = tokens[1].get_tag(Ingredient).type
-      result
-    end
-
-    def parse_sclmsr_msr_ing(tokens)
-      result = {}
-      result[:ammount]     = tokens[0].get_tag(ScalarMeasurement).type
-      result[:measurement] = tokens[1].get_tag(Measurement).type
-      result[:ingredient]  = tokens[2].get_tag(Ingredient).type
-      result
-    end
-
-    #3 tbsp unsweetened applesauce
-    def parse_sclmsr_msr_mod_ing(tokens)
-      result = {}
-      result[:ammount]     = tokens[0].get_tag(ScalarMeasurement).type
-      result[:measurement] = tokens[1].get_tag(Measurement).type
-      result[:modifier]    = tokens[2].get_tag(Modifier).type
-      result[:ingredient]  = tokens[3].get_tag(Ingredient).type
-      result
-    end
-
-    # 15 g  goat cheese, crumbled
-    def parse_sclmsr_msr_ing_mod(tokens)
-      result = {}
-      result[:ammount]     = tokens[0].get_tag(ScalarMeasurement).type
-      result[:measurement] = tokens[1].get_tag(Measurement).type
-      result[:ingredient]  = tokens[2].get_tag(Ingredient).type
-      result[:modifier]    = tokens[3].get_tag(Modifier).type
-      result
-    end
-
-    # banana chopped
-    def parse_ing_mod(tokens)
-      result = {}
-      result[:ingredient]  = tokens[0].get_tag(Ingredient).type
-      result[:modifier]    = tokens[1].get_tag(Modifier).type
-      result[:ammount]     = 1
-      result
-    end
-
-    # chopped banana
-    def parse_mod_ing(tokens)
-      result = {}
-      result[:modifier]    = tokens[0].get_tag(Modifier).type
-      result[:ingredient]  = tokens[1].get_tag(Ingredient).type
-      result[:ammount]     = 1
-      result
-    end
-
-
-
 
     def constantize(klass_name)
       camel = klass_name.to_s.gsub(/(^|_)(.)/) { $2.upcase }
       ::Onigiri.const_get camel
+    end
+  end
+
+  class MatchSet
+    def matches
+      @matches ||= []
+    end
+
+    def << (tag)
+      matches << tag
+    end
+
+    def result
+      result = {}
+      result[:ingredient]  = parse_ingredient
+      result[:modifier]    = parse_modifier
+      result[:ammount]     = parse_ammount
+      result[:measurement] = parse_measurement
+      result
+    end
+
+    def parse_ingredient
+      get_tags(Ingredient).map{|i| i.type }.join(", ")
+    end
+
+    def parse_modifier
+      get_tags(Modifier).map{|i| i.type }.join(", ")
+    end
+
+    def parse_measurement
+      get_tag(Measurement).type
+    end
+
+    def parse_ammount
+      get_tag(ScalarMeasurement).type
+    end
+
+    def get_tags(klass_name)
+      matches.select{|x| x.is_a? klass_name}
+    end
+
+    def get_tag(klass_name)
+      matches.find{|x| x.is_a? klass_name}
     end
   end
 end
