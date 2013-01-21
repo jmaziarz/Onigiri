@@ -64,6 +64,7 @@ module Onigiri
         text = Measurement.normalize(text)
         text = Ingredient.normalize(text)
         text = Modifier.normalize(text)
+        text = Numerizer.numerize(text)
         text
       end
     end
