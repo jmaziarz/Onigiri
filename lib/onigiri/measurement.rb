@@ -55,5 +55,12 @@ module Onigiri
     set_measurement "liter", "l", "liter", "liters"
     set_measurement "milligram", "mg", "mg.", "milligram", "milligrams"
     set_measurement "milliliter", "ml", "ml.", "milliliter", "milliliters"
+
+    set_measurement "clove", "cloves"
+    set_measurement "head"
+
+    set_measurement "medium", 'med\.?'
+    set_measurement "large", 'lrg\.?'
+    set_measurement "small", 'sml\.?'
   end
 end
