@@ -12,11 +12,6 @@ module Onigiri
 
         tokens = select_tagged_only(tokens) 
 
-        matchset = nil
-        templates.each do |template|
-          break if (matchset = template.match tokens)
-        end
-
         if ::Onigiri.debug
           puts "\n+---------------------------------------------------"
           puts "text: #{text}"
@@ -25,20 +20,30 @@ module Onigiri
           puts "+---------------------------------------------------\n"
         end
 
-        if matchset
-          return matchset.result
-        else
-          return {:status => "Nothing Matched"}
+        matchset = nil
+        templates[:exact_match].each do |template|
+          return matchset.result if (matchset = template.match tokens)
         end
+  
+        templates[:broad_match].each do |template|
+          return matchset.result if (matchset = template.nonstrict_match tokens)
+        end
+        return nil
       end
 
       def templates
-        @templates ||= [
-          Template.new([:modifier, :ingredient]),
-          Template.new([:ingredient, :modifier]),
-          Template.new([:scalar, :modifier?, :ingredient]),
-          Template.new([:scalar_measurement, :measurement, :modifier?, :modifier?, :ingredient, :modifier?, :modifier?]),
-        ]
+        @templates ||=
+        {:exact_match =>[Template.new([:modifier, :ingredient]),
+                         Template.new([:ingredient, :modifier]),
+                         Template.new([:scalar, :modifier?, :ingredient]),
+                         Template.new([:scalar_measurement, :measurement, :modifier?, :modifier?, :ingredient, :modifier?, :modifier?])],
+         
+         :broad_match =>[Template.new([:scalar_measurement, :measurement, :modifier, :ingredient]),
+                         Template.new([:scalar_measurement, :measurement, :ingredient]),
+                         Template.new([:scalar, :modifier, :ingredient]),
+                         Template.new([:scalar, :ingredient]),
+                         Template.new([:modifier, :ingredient]),
+                         Template.new([:ingredient, :modifier, :scalar])]}
       end
 
       def taggers
