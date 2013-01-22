@@ -52,4 +52,17 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal(expected[:ingredient],   result[:ingredient])
     assert_equal(expected[:measurement],  result[:measurement])
   end
+
+  def test_parsing_multiple_ingredients_
+    text = "1/2 cup each carrots, celery and onions"
+    assert_equal result('carrot', 0.5, 'cup'),  Onigiri::Onigiri.parse(text)
+  end
+
+  def result(ingredient, ammount="", measurement="", modifier="")
+     result = {  :ammount => ammount, 
+                 :ingredient => ingredient,
+                 :measurement => measurement, 
+                 :modifier => modifier 
+               }
+  end
 end
