@@ -42,6 +42,28 @@ module Onigiri
       return matchset
     end
 
+    #ignores presence of other tags which are not defined in templates pattern.
+    # i.e. for pattern => :a,:b: given tokens => a,x,y,b - the method will match.
+    def nonstrict_match(tokens)
+      matchset = MatchSet.new()
+      index = 0;
+      tokens.each do |token|
+        tagger_name = pattern[index].to_s
+        klass = constantize(tagger_name)
+        match = token.has_tag?(klass)        
+        if match
+          matchset << token.get_tag(klass);
+          index += 1; 
+          next; 
+        else
+          next
+        end
+      end
+
+      return false if matchset.size != pattern.size
+      return matchset
+    end
+
     def constantize(klass_name)
       camel = klass_name.to_s.gsub(/(^|_)(.)/) { $2.upcase }
       ::Onigiri.const_get camel
@@ -64,6 +86,10 @@ module Onigiri
       result[:ammount]     = parse_ammount
       result[:measurement] = parse_measurement
       result
+    end
+
+    def size
+      matches.size
     end
 
     def parse_ingredient

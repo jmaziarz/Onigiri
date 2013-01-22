@@ -34,4 +34,13 @@ class TestTemplate < MiniTest::Unit::TestCase
     assert optional.match([@tok_a, @tok_b])
     refute not_optional.match([@tok_a, @tok_b])
   end
+
+  # i.e. for pattern => :a,:b: given tokens => a,x,y,b - the method will match.
+  def test_nonstrict_match_allows_unrelated_tokens_to_be_present
+    template = Onigiri::Template.new([:scalar_measurement, :measurement])
+    blah_token  = Onigiri::Token.new("99")
+    blah_tag = Onigiri::ScalarMeasurement.new(99)
+    blah_token.add_tag blah_tag
+    assert template.nonstrict_match [@tok_a, blah_token, @tok_b]
+  end
 end
