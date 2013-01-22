@@ -48,6 +48,7 @@ module Onigiri
       matchset = MatchSet.new()
       index = 0;
       tokens.each do |token|
+        break unless pattern[index]
         tagger_name = pattern[index].to_s
         klass = constantize(tagger_name)
         match = token.has_tag?(klass)        
