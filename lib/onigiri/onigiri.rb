@@ -37,9 +37,7 @@ module Onigiri
           Template.new([:modifier, :ingredient]),
           Template.new([:ingredient, :modifier]),
           Template.new([:scalar, :modifier?, :ingredient]),
-          Template.new([:scalar_measurement, :measurement, :ingredient]),
-          Template.new([:scalar_measurement, :measurement, :modifier, :ingredient]),
-          Template.new([:scalar_measurement, :measurement, :ingredient, :modifier])
+          Template.new([:scalar_measurement, :measurement, :modifier?, :modifier?, :ingredient, :modifier?, :modifier?]),
         ]
       end
 
