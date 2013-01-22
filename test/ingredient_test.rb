@@ -26,4 +26,11 @@ class TestIngredient < MiniTest::Unit::TestCase
     assert_equal true, tok_a.tags.first.is_a?(Onigiri::Ingredient)
     assert_equal "banana", tok_a.tags.first.type
   end
+
+  def test_can_use_regexs_defined_in_set_ingredients_when_scanning
+    Onigiri::Ingredient.set_ingredient 'success', 'test\w\w\w\wtest'
+    tok_a = Onigiri::Token.new("testABCDtest")
+    Onigiri::Ingredient.scan_for_ingredient(tok_a)
+    assert "success", tok_a.get_tag(Onigiri::Ingredient).type 
+  end
 end

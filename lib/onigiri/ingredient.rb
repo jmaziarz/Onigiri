@@ -12,7 +12,7 @@ module Onigiri
       def scan_for_ingredient(token)
         ingredients.each do |correct_form, variations|
           variations.each do |var|
-            if token.name.gsub("_", " ") == var
+            if token.name.gsub("_", " ") =~ /\b#{var}\b/
               token.add_tag new(correct_form)
               return
             end
@@ -229,7 +229,7 @@ module Onigiri
     set_ingredient 'cardamom'
     set_ingredient 'carob'
     set_ingredient 'carrageen'
-    set_ingredient 'carrots'
+    set_ingredient 'carrot', 'carrots'
     set_ingredient 'cashew nut'
     set_ingredient 'cassava'
     set_ingredient 'casserole'
