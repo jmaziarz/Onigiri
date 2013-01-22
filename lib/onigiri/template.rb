@@ -6,7 +6,7 @@ module Onigiri
       @pattern      = pattern
     end
 
-    def matches?(tokens)
+    def match(tokens)
       matchset = MatchSet.new()
       index = 0;
       pattern.each do |element|

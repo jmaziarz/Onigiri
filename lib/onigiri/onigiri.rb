@@ -14,7 +14,7 @@ module Onigiri
 
         matchset = nil
         templates.each do |template|
-          break if (matchset = template.matches? tokens)
+          break if (matchset = template.match tokens)
         end
 
         if ::Onigiri.debug

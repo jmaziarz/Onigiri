@@ -16,22 +16,22 @@ class TestTemplate < MiniTest::Unit::TestCase
   end
 
   def test_template_matches_tokens_and_returns_matchset
-    matchset = @template.matches? [@tok_a, @tok_b]
+    matchset = @template.match [@tok_a, @tok_b]
     assert_equal [@tag_a, @tag_b], matchset.matches
   end
 
   def test_template_does_not_match_tokens_in_wrong_order
-    refute @template.matches? [@tok_b, @tok_a]
+    refute @template.match [@tok_b, @tok_a]
   end
 
   def test_template_match_fails_if_unmatched_pattern_parts_exist
-    refute @template.matches? [@tok_a]
+    refute @template.match [@tok_a]
   end
 
   def test_template_match_allows_optional_pattern_elements_to_not_match
     not_optional = Onigiri::Template.new([:scalar_measurement, :ingredient, :measurement])
     optional     = Onigiri::Template.new([:scalar_measurement, :ingredient?, :measurement])
-    assert optional.matches?([@tok_a, @tok_b])
-    refute not_optional.matches?([@tok_a, @tok_b])
+    assert optional.match([@tok_a, @tok_b])
+    refute not_optional.match([@tok_a, @tok_b])
   end
 end
