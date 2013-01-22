@@ -10,12 +10,14 @@ module Onigiri
       matchset = MatchSet.new()
       index = 0;
       pattern.each do |element|
+        
         tagger_name = element.to_s
         optional    = (tagger_name.reverse[0..0] == '?')
         tagger_name = tagger_name.chop if optional
         klass = constantize(tagger_name)
         match = (tokens[index] and tokens[index].has_tag?(klass))
 
+        # binding.pry
         #not optional
         #match - next token, next element
         #no match - return false
@@ -25,7 +27,6 @@ module Onigiri
         #no match - next element.        
         return false  if (!match and !optional)
         if (optional and !match)
-          matchset << tokens[index].get_tag(klass)
           next
         end
         if match
@@ -66,19 +67,23 @@ module Onigiri
     end
 
     def parse_ingredient
-      get_tags(Ingredient).map{|i| i.type }.join(", ")
+      tags = get_tags(Ingredient)
+      tags.map{|i| i.type }.join(", ") if tags
     end
 
     def parse_modifier
-      get_tags(Modifier).map{|i| i.type }.join(", ")
+      tags = get_tags(Modifier)
+      tags.map{|i| i.type }.join(", ") if tags
     end
 
     def parse_measurement
-      get_tag(Measurement).type
+      tag = get_tag(Measurement)
+      tag.type if tag
     end
 
     def parse_ammount
-      get_tag(ScalarMeasurement).type
+      tag = get_tag(ScalarMeasurement)
+      tag.type if tag
     end
 
     def get_tags(klass_name)
