@@ -66,4 +66,8 @@ module Onigiri
       end
     end
   end
+
+  #for intenal error reporting
+  class OnigiriPain < Exception #:nodoc:
+  end 
 end

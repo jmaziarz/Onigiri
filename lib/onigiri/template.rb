@@ -68,6 +68,8 @@ module Onigiri
     def constantize(klass_name)
       camel = klass_name.to_s.gsub(/(^|_)(.)/) { $2.upcase }
       ::Onigiri.const_get camel
+    rescue 
+      raise OnigiriPain, "there isnt a * #{camel} * tagger class defined"
     end
   end
 
