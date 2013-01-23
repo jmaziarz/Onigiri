@@ -75,4 +75,42 @@ module Onigiri
   #for intenal error reporting
   class OnigiriPain < Exception #:nodoc:
   end 
+
+  class Logger
+
+    class << self
+      def store
+        @store ||= {}
+        @store[:ingredient_errors] ||= []
+        @store[:pattern_errors] ||= {}
+        @store
+      end
+
+      def reset
+        @store = {}
+      end
+
+      #store strings which dont have matched ingredeint (store string with all matched tags removed?)
+      def no_ingredient_found(string)
+        store[:ingredient_errors] << string
+      end
+  
+      #store token signatures which dont have a corresponding pattern. 
+      def no_pattern_match(tokens, string)
+        combinations = tag_combinations_for(tokens)
+        combinations.each do |combo|
+          binding.pry
+          store[:pattern_errors][combo] ||= []
+          store[:pattern_errors][combo] << string
+        end
+      end
+
+      def tag_combinations_for(tokens)
+        tags = tokens.map{|t| t.tags.map(&:klass_name) }
+        head, *rest = tags
+        combinations = head.product *rest
+        combinations.map{|x| x.join(" ")}
+      end
+    end
+  end
 end

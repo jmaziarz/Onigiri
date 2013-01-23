@@ -5,8 +5,12 @@ module Onigiri
       @type = type
     end
 
+    def klass_name
+      self.class.to_s.gsub(/.+::(\w+)$/, '\1')
+    end
+
     def to_s
-      "#{type.to_s} (#{self.class.to_s.gsub(/.+::(\w+)$/, '\1')})"
+      "#{type.to_s} (#{klass_name})"
     end
   end
 end
