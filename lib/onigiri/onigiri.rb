@@ -79,29 +79,25 @@ module Onigiri
   class Logger
 
     class << self
-      def store
-        @store ||= {}
-        @store[:ingredient_errors] ||= []
-        @store[:pattern_errors] ||= {}
-        @store
+      def redis
+        r ||= Redis.new(:host => 'localhost', :port => 6379)
+        @namespace ||= Redis::Namespace.new(:onigiri, :redis => r)
       end
 
       def reset
-        @store = {}
+        redis.flushall
       end
 
       #store strings which dont have matched ingredeint (store string with all matched tags removed?)
       def no_ingredient_found(string)
-        store[:ingredient_errors] << string
+        redis.lpush 'ingredient_errors', string
       end
   
       #store token signatures which dont have a corresponding pattern. 
       def no_pattern_match(tokens, string)
         combinations = tag_combinations_for(tokens)
         combinations.each do |combo|
-          binding.pry
-          store[:pattern_errors][combo] ||= []
-          store[:pattern_errors][combo] << string
+          redis.lpush(combo, string)
         end
       end
 

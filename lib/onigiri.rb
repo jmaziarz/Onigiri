@@ -10,6 +10,9 @@ require 'onigiri/scalar'
 require 'onigiri/ingredient'
 require 'onigiri/modifier'
 
+require 'redis'
+require 'redis/namespace'
+
 require 'pry'
 module Onigiri
   class << self
