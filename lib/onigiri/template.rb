@@ -111,7 +111,7 @@ module Onigiri
     end
 
     def parse_ammount
-      tag = get_tag(ScalarMeasurement)
+      tag = get_tag(ScalarMeasurement) || get_tag(Scalar)
       tag.type if tag
     end
 
