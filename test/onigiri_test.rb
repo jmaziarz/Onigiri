@@ -30,31 +30,16 @@ class TestOnigiri < MiniTest::Unit::TestCase
 
   def test_parsing_from_text_sclmsr_msr_ing
     Onigiri::Ingredient.set_ingredient 'cherry tomato'
-    text = "10 lbs of cherry tomato"
-    expected = {:ammount => 10, :ingredient => 'cherry tomato', :measurement => 'pound'}
-    result = Onigiri::Onigiri.parse(text)
-    assert_equal(expected[:ammount],      result[:ammount])
-    assert_equal(expected[:ingredient],   result[:ingredient])
-    assert_equal(expected[:measurement],  result[:measurement])
+    assert_equal result('cherry tomato', 10, 'pound'), Onigiri::Onigiri.parse("10 lbs of cherry tomato")
   end
 
   def test_parsing_from_text_including_ingredient_variation
     Onigiri::Ingredient.set_ingredient 'dijon mustard', 'dijjon'
-    text = "1 tbsp Dijjon mustard"
-    expected = {:ammount => 1, :ingredient => 'dijon mustard', :measurement => 'tablespoon'}
-    result = Onigiri::Onigiri.parse(text)
-    assert_equal(expected[:ammount],      result[:ammount])
-    assert_equal(expected[:ingredient],   result[:ingredient])
-    assert_equal(expected[:measurement],  result[:measurement])
+    assert_equal(result('dijon mustard', 1, 'tablespoon'), Onigiri::Onigiri.parse("1 tbsp Dijjon mustard"))
   end
 
   def test_parsing_sclmsr_msr_ing
-    text = "1 1/2 tbsp honey"
-    expected = {:ammount => 1.5, :ingredient => 'honey', :measurement => 'tablespoon'}
-    result = Onigiri::Onigiri.parse(text)
-    assert_equal(expected[:ammount],      result[:ammount])
-    assert_equal(expected[:ingredient],   result[:ingredient])
-    assert_equal(expected[:measurement],  result[:measurement])
+    assert_equal result('honey', 1.5, 'tablespoon'), Onigiri::Onigiri.parse("1 1/2 tbsp honey")
   end
 
   def test_parsing_multiple_ingredients_
