@@ -20,6 +20,8 @@ module Onigiri
           puts "+---------------------------------------------------\n"
         end
 
+
+
         matchset = nil
         templates[:exact_match].each do |template|
           return matchset.result if (matchset = template.match tokens)
@@ -28,6 +30,12 @@ module Onigiri
         templates[:broad_match].each do |template|
           return matchset.result if (matchset = template.nonstrict_match tokens)
         end
+
+        if ::Onigiri.log_failures
+          Logger.no_ingredient_found(text) unless tokens.find{|x| x.has_tag?(Ingredient) }
+          Logger.no_pattern_match(tokens, text) 
+        end
+
         return nil
       end
 
@@ -77,11 +85,13 @@ module Onigiri
   end 
 
   class Logger
-
     class << self
       def redis
-        r ||= Redis.new(:host => 'localhost', :port => 6379)
-        @namespace ||= Redis::Namespace.new(:onigiri, :redis => r)
+        @redis
+      end
+
+      def redis=(redis)
+        @redis = redis
       end
 
       def reset
@@ -97,7 +107,8 @@ module Onigiri
       def no_pattern_match(tokens, string)
         combinations = tag_combinations_for(tokens)
         combinations.each do |combo|
-          redis.lpush(combo, string)
+          redis.sadd(combo, string)
+          redis.zadd('pattern_count', redis.scard(combo).to_s, combo)
         end
       end
 
@@ -106,6 +117,20 @@ module Onigiri
         head, *rest = tags
         combinations = head.product *rest
         combinations.map{|x| x.join(" ")}
+      end
+
+      def report_ingredient_failures
+        redis.lrange('ingredient_errors', 0, -1).join("\n")
+      end
+
+      def report_pattern_failures
+        str = "===========\nPattern failures\n============\n"
+        redis.zrevrange('pattern_count', 0, -1).each do |pattern|
+          puts "#{redis.zscore('pattern_count', pattern)} - #{pattern}"
+          puts "-------------------------------------"
+          redis.smembers(pattern).each {|x| puts x }
+          puts "\n"
+        end
       end
     end
   end

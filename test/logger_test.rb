@@ -2,7 +2,9 @@ require 'helper'
 
 class TestLogger < MiniTest::Unit::TestCase
   def setup
+    redis = Redis::Namespace.new(:onigiri_testing, :redis => Redis.new)
     @logger = Onigiri::Logger 
+    @logger.redis = redis
     @logger.reset
   end
 
@@ -43,6 +45,6 @@ class TestLogger < MiniTest::Unit::TestCase
     tokens = [tok_a, tok_b]
 
     @logger.no_pattern_match(tokens, "5lbs of honey")
-    assert_equal ["5lbs of honey"], @logger.redis.lrange("ScalarMeasurement Modifier", 0, -1)
+    assert_equal ["5lbs of honey"], @logger.redis.smembers("ScalarMeasurement Modifier")
   end
 end
