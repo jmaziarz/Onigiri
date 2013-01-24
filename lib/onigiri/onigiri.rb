@@ -42,6 +42,7 @@ module Onigiri
         {:exact_match =>[Template.new([:modifier, :ingredient]),
                          Template.new([:ingredient, :modifier]),
                          Template.new([:scalar, :modifier?, :ingredient]),
+                         Template.new([:scalar, :ingredient, :modifier]),
                          Template.new([:scalar_measurement, :measurement, :modifier?, :modifier?, :ingredient, :modifier?, :modifier?])],
          
          :broad_match =>[Template.new([:scalar_measurement, :measurement, :modifier, :ingredient]),
