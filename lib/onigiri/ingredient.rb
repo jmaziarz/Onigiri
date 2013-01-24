@@ -12,7 +12,7 @@ module Onigiri
       def scan_for_ingredient(token)
         ingredients.each do |correct_form, variations|
           variations.each do |var|
-            if token.name.gsub("_", " ") =~ /\b#{var}\b/
+            if token.name.gsub("_", " ") =~ /^#{var}$/
               token.add_tag new(correct_form)
               return
             end
