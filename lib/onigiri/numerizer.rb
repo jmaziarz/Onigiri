@@ -43,10 +43,6 @@ module Onigiri
       ["thousand", "1000"]
     ]
 
-    RANGES = [
-      ['', $1]
-    ]
-
     def numerize(string)
       #first fractions 1/2 => 0.5, 1 1/2 => 1.5
       string.gsub!(/(\d\d?)\/(\d\d?\d?)/) { ($1.to_f/ $2.to_f).round(2).to_s} 
