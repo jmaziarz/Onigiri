@@ -10,6 +10,10 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal "the end", Onigiri::Onigiri.normalize(text)
   end
 
+  def test_normalizes_use_of_whole_after_number
+    assert_equal "1 pumpkin", Onigiri::Onigiri.normalize("one whole pumpkin")
+  end 
+
   def test_tokenizes_text
     text = "one two"
     tokens = Onigiri::Onigiri.tokenize(text)

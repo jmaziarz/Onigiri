@@ -20,8 +20,6 @@ module Onigiri
           puts "+---------------------------------------------------\n"
         end
 
-
-
         matchset = nil
         templates[:exact_match].each do |template|
           return matchset.result if (matchset = template.match tokens)
@@ -69,12 +67,13 @@ module Onigiri
       def normalize(str)
         text = str.dup
         text.downcase!
-        text.gsub!(/[.,]/, '')
-        text.gsub!(/\(.*?\)/, '')
+        text.gsub!(/[.,]/, '') 
+        text.gsub!(/\(.*?\)/, '') #remove brackets and their contents. 
         text = Measurement.normalize(text)
         text = Ingredient.normalize(text)
         text = Modifier.normalize(text)
         text = Numerizer.numerize(text)
+        text.gsub!(/(\d+\.?\d*?)\s+whole/, '\1') #remove useage of whole but only after a number/decimal
         text
       end
     end
