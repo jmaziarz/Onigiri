@@ -114,6 +114,7 @@ module Onigiri
       def tag_combinations_for(tokens)
         tags = tokens.map{|t| t.tags.map(&:klass_name) }
         head, *rest = tags
+        return [] if tags.empty?  
         combinations = head.product *rest
         combinations.map{|x| x.join(" ")}
       end
