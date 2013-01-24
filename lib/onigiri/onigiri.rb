@@ -73,7 +73,7 @@ module Onigiri
         text = Ingredient.normalize(text)
         text = Modifier.normalize(text)
         text = Numerizer.numerize(text)
-        text.gsub!(/(\d+\.?\d*?)\s+whole/, '\1') #remove useage of whole but only after a number/decimal
+        text.gsub!(/(\d+\.?\d*?)\s+whole/, '\1') #remove useage of 'whole' but only after a number/decimal 
         text
       end
     end
