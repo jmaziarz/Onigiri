@@ -50,6 +50,7 @@ module Onigiri
     set_modifier 'grated'
     set_modifier 'grainy'
     set_modifier 'heated'
+    set_modifier 'juiced'
     set_modifier 'minced'
     set_modifier 'peeled'
     set_modifier 'ripe'
