@@ -43,6 +43,10 @@ module Onigiri
       ["thousand", "1000"]
     ]
 
+    RANGES = [
+      ['', $1]
+    ]
+
     def numerize(string)
       #first fractions 1/2 => 0.5, 1 1/2 => 1.5
       string.gsub!(/(\d\d?)\/(\d\d?\d?)/) { ($1.to_f/ $2.to_f).round(2).to_s} 
@@ -67,6 +71,9 @@ module Onigiri
       BIG_NUMS.each do |word, number|
         string.gsub!(/\b#{word}\b/i, number)
       end
+
+      #convert ranges : 1 or 2 apples => 1 apple
+      string.gsub!(/\b(\d\d?\d?)\s?(-|or|to)\s?(\d\d?\d?)\b/, '\1')
 
       string
     end

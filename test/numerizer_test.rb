@@ -59,8 +59,19 @@ class TestNumerizer < MiniTest::Unit::TestCase
     fractions.each do |fraction, decimal|
       assert_equal decimal, Onigiri::Numerizer.numerize(fraction)
     end
+  end
 
+  def test_chooses_first_number_in_a_range
+    ranges = [
+      ["1-2", "1"],
+      ["2 - 3", "2"],
+      ["2 or 3", "2"],
+      ["two or three", "2"],
+      ["two to three", "2"]
+    ]
 
-
+    ranges.each do |range, choosen|
+      assert_equal choosen, Onigiri::Numerizer.numerize(range)
+    end
   end
 end
