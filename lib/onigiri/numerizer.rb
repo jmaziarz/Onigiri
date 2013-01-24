@@ -44,10 +44,6 @@ module Onigiri
     ]
 
     def numerize(string)
-      #first fractions 1/2 => 0.5, 1 1/2 => 1.5
-      string.gsub!(/(\d\d?)\/(\d\d?\d?)/) { ($1.to_f/ $2.to_f).round(2).to_s} 
-      #add converted fraction to any preceding numbers e.g. 1 1/2 => 1 0.5 => 1.5
-      string.gsub!(/(\d\d?) (\d\.\d\d?\d?\d?)/) { ($1.to_f + $2.to_f).round(2).to_s }
 
       DIRECT_NUMS.each do |word, number|
         string.gsub!(/\b#{word}\b/i, number)
@@ -68,6 +64,11 @@ module Onigiri
         string.gsub!(/\b#{word}\b/i, number)
       end
 
+      #first fractions 1/2 => 0.5, 1 1/2 => 1.5
+      string.gsub!(/(\d\d?)\/(\d\d?\d?)/) { ($1.to_f/ $2.to_f).round(2).to_s} 
+      #add converted fraction to any preceding numbers e.g. 1 1/2 => 1 0.5 => 1.5
+      string.gsub!(/(\d\d?) (\d\.\d\d?\d?\d?)/) { ($1.to_f + $2.to_f).round(2).to_s }
+      
       #convert ranges : 1 or 2 apples => 1 apple
       string.gsub!(/\b(\d\d?\d?)\s?(-|or|to)\s?(\d\d?\d?)\b/, '\1')
 
