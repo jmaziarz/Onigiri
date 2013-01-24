@@ -364,7 +364,7 @@ module Onigiri
     set_ingredient 'edam'
     set_ingredient 'edamame'
     set_ingredient 'eels'
-    set_ingredient 'eggs'
+    set_ingredient 'egg', 'eggs?'
     set_ingredient 'egg substitutes'
     set_ingredient 'eggplants'
     set_ingredient 'elderberries'
