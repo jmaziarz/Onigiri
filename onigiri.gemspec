@@ -15,6 +15,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Onigiri::VERSION
 
+  gem.add_dependency 'redis'
+  gem.add_dependency 'redis-namespace'
+
   gem.add_development_dependency "minitest"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "pry"
