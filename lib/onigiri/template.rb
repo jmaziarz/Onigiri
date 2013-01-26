@@ -112,7 +112,7 @@ module Onigiri
 
     def parse_ammount
       tag = get_tag(ScalarMeasurement) || get_tag(Scalar)
-      tag.type if tag
+      tag ? tag.type : 1.0 #default to 1.0 if no ammount was specified
     end
 
     def get_tags(klass_name)
