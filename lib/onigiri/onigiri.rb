@@ -19,7 +19,6 @@ module Onigiri
           tokens.map{|t| puts t.to_s}
           puts "+---------------------------------------------------\n"
         end
-
         matchset = nil
         templates[:exact_match].each do |template|
           return matchset.result if (matchset = template.match tokens)
@@ -39,8 +38,10 @@ module Onigiri
 
       def templates
         @templates ||=
-        {:exact_match =>[Template.new([:modifier, :ingredient]),
-                         Template.new([:ingredient, :modifier]),
+        {:exact_match =>[Template.new([:modifier, :ingredient]), 
+                         Template.new([:ingredient, :ingredient?, :ingredient?]), #Cheese Slices, Avocado, Red Onion Slices
+                         Template.new([:ingredient, :modifier]), #turkey sliced
+                         Template.new([:measurement, :ingredient]), #small basil leaves
                          Template.new([:scalar, :modifier?, :ingredient]),
                          Template.new([:scalar, :ingredient, :modifier]),
                          Template.new([:scalar_measurement, :measurement, :modifier?, :modifier?, :ingredient, :modifier?, :modifier?])],
@@ -68,7 +69,7 @@ module Onigiri
       def normalize(str)
         text = str.dup
         text.downcase!
-        text.gsub!(/[.,]/, '') 
+        text.gsub!(/[.,'`*]/, '') 
         text.gsub!(/\(.*?\)/, '') #remove brackets and their contents. 
         text = Measurement.normalize(text)
         text = Ingredient.normalize(text)
