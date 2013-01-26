@@ -1,3 +1,4 @@
+# encoding: UTF-8 
 module Onigiri
   class Ingredient < Tag
     class << self
@@ -41,6 +42,214 @@ module Onigiri
       end
     end
 
+    #alcohol & drinks
+    set_ingredient 'soda', 'club soda'
+    set_ingredient 'gin'
+    set_ingredient 'triple sec'
+    set_ingredient 'tequila'
+
+    
+   
+    #biscusits 
+    set_ingredient 'oreo', 'oreos'
+    set_ingredient 'ginger snap', 'ginger nuts?', 'ginger\s?snaps?'
+
+    #breads and grains
+    set_ingredient 'attr_reader :attr_namesye bread'
+    set_ingredient 'bread'
+    set_ingredient 'garlic bread'
+    set_ingredient 'kaiser roll', 'kaiser rolls?'
+    set_ingredient 'hamburger roll', 'hamburger rolls?'
+    set_ingredient 'pretzel', 'pretzels?'
+    set_ingredient 'roll', 'rolls?'
+    set_ingredient 'rye bread'
+    set_ingredient 'french bread'
+    set_ingredient 'sourdough', 'sour dough'
+
+
+    #baking
+    set_ingredient 'peppermint extract'
+    set_ingredient 'icing'
+    set_ingredient 'icing powder'
+    set_ingredient 'pancake', 'pancakes'
+    set_ingredient 'lime jello', 'lime jell[oy]'
+    set_ingredient 'sprinkles'
+    set_ingredient 'puff pastry','puff(ed)? pastry'
+    set_ingredient 'vanilla extract'
+
+    set_ingredient 'brown sugar'
+    set_ingredient 'dark-brown sugar', 'dark brown sugar'
+    set_ingredient 'barley sugar'
+    set_ingredient 'date sugar'
+    set_ingredient 'icing sugar'
+    set_ingredient 'muscovado sugar'
+    set_ingredient 'palm sugar'
+    set_ingredient 'sugar'
+
+
+    set_ingredient 'oats', 'rolled oats'
+    set_ingredient 'millet'
+    set_ingredient 'farro'
+
+    set_ingredient 'gram flour'
+    set_ingredient 'whole wheat flour'
+    set_ingredient 'corn flour'
+    set_ingredient 'flour'
+    set_ingredient 'pizza dough'
+
+    set_ingredient 'pumpkin seed', 'pumpkin seeds', 'pepita', 'pepitas'
+
+    #cheeses
+    set_ingredient 'cheddar', 'cheese cheese'
+    set_ingredient 'cheese slice', 'cheese slices?'
+    set_ingredient 'feta', 'feta( cheese)?'
+    set_ingredient 'gruyere', 'gruy[eè]re'
+    set_ingredient 'monterey jack', 'monterey jack( cheese)?'
+    set_ingredient 'mozzarella cheese', 'mozz?arell?a cheese'
+    set_ingredient 'parmesan', 'parmesan cheese'
+    set_ingredient 'ricotta', 'ricotta cheese'
+
+    #condiments
+    set_ingredient 'coleslaw', 'slaw'
+    set_ingredient 'guacamole'
+
+    set_ingredient 'green enchilada sauce'
+    set_ingredient 'pico de gallo'
+    
+    set_ingredient 'maple extract'
+
+    set_ingredient 'mayonnaise', 'mayo'
+
+    set_ingredient 'mustard'
+    set_ingredient 'yellow mustard'
+    set_ingredient 'american mustard'
+    set_ingredient 'dijon mustard', 'dijon'
+
+    #dairy
+    set_ingredient 'butter'
+    set_ingredient 'unsalted butter', 'unsalted(-|\s)?butter'
+    set_ingredient 'milk'
+    set_ingredient 'whole milk', 'full fat milk'
+    set_ingredient 'low fat milk', 'semi skimmed milk'
+    set_ingredient 'whipped cream', 'whipping cream'
+
+    #fish
+    set_ingredient 'anchovy', 'anchovies?'
+    set_ingredient 'anchovy paste'
+
+     #fruit
+    set_ingredient 'green chili', 'green chilies'
+    set_ingredient 'jalapeno', 'jalapenos'
+    set_ingredient 'pepperoncinis'
+    set_ingredient 'pimento', 'pimentos?'
+
+    set_ingredient 'lemon', 'lemons'
+    set_ingredient 'lemon juice'
+    set_ingredient 'lemon peel'
+    set_ingredient 'lime', 'limes'
+    set_ingredient 'lime juice', 'lime juice'
+
+    set_ingredient 'orange zest'
+    set_ingredient 'orange', 'oranges'
+    set_ingredient 'orange peel'
+    set_ingredient 'mandarin orange', 'mandarin oranges'
+    
+    #herbs
+    set_ingredient 'herb bundle', 'bundle of herbs'
+    set_ingredient 'lemon grass'
+
+    #legumes 
+    set_ingredient 'black-eyed pea', 'black-?eyed? (peas?|beans?)'
+    #oils & vinegars
+    set_ingredient 'canola oil', 'cana?ola oil'
+    set_ingredient 'nonstick cooking spray', 'non(-\s)?stick cooking (spray|oil)'
+
+    set_ingredient 'vegetable oil'
+    set_ingredient 'olive vegetable oil'
+    set_ingredient 'olive oil', 'olive( oil)? or vegetable( oil)?'
+    set_ingredient 'rice wine vinegar'
+    set_ingredient 'white vinegar', 'white (wine )?vinegar'
+    set_ingredient 'sherry vinegar'
+
+    #meats
+    set_ingredient 'hot dog', 'hot(-|\s)?dogs?'
+    set_ingredient 'pepperoni', 'pepp?eroni'
+
+    set_ingredient 'chuck'
+    set_ingredient 'meat'
+
+    #nuts
+    set_ingredient 'assorted nuts'
+    set_ingredient 'cashew', 'cashews? nuts?', 'cashews?'
+
+    #pastas
+    set_ingredient 'fettuccine'
+    set_ingredient 'rigatoni'
+    set_ingredient 'penne'
+    set_ingredient 'mostaccioli', 'mostacc?ioll?i'
+    set_ingredient 'ziti'
+    set_ingredient 'linguine'
+
+    #sauces, stocks, soups
+    set_ingredient 'marinara sauce'
+    set_ingredient 'gravy'
+    set_ingredient 'chicken broth'
+    set_ingredient 'chicken stock'
+    set_ingredient 'vegetable broth'
+    set_ingredient 'vegetable stock'
+    set_ingredient 'beef broth'
+    set_ingredient 'beef stock'
+    set_ingredient 'stock'
+    set_ingredient 'bolognese sauce'
+    #seasoning
+    set_ingredient 'cajun seasoning', 'cajun spice mix'
+    set_ingredient 'italian seasoning'
+    set_ingredient 'aleppo flakes', 'aleppo pepper'
+    set_ingredient 'cayenne', 'cayenne pepper'
+    set_ingredient 'red chili', 'red chilies'
+    set_ingredient 'red pepper flake', 'red pepper flakes?'
+
+    set_ingredient 'salt'
+    set_ingredient 'kosher salt'
+    set_ingredient 'sea salt'
+    set_ingredient 'salt & pepper', 'salt.+?pepper'
+
+    #spices
+    set_ingredient 'cumin'
+    set_ingredient 'nutmeg'
+    set_ingredient 'paprika'
+    set_ingredient 'peppercorn', 'pepper\s?corns?'
+
+    #sweets, chooclate etc
+    #cakes
+    set_ingredient 'angel food cake', 'ang(el|le)\s?(food)\s?cake'
+    set_ingredient 'pound cake'
+    #confect.
+    set_ingredient 'andes mints', 'andes mints?'
+    set_ingredient 'caramel sauce'
+    set_ingredient 'caramel syrup'
+    set_ingredient 'chocolate'
+    set_ingredient 'white chocolate'
+    set_ingredient 'candy cane', 'candy canes?'
+    set_ingredient 'M & Ms', 'm\s?&\s?ms?'
+    set_ingredient 'toffee bar', 'toffee bars?'
+    set_ingredient 'nutella'
+    set_ingredient 'fudge'
+    set_ingredient 'syrup'
+    set_ingredient 'blackberry syrup'
+    set_ingredient 'maple syrup'
+
+
+    #veg
+    set_ingredient 'endive', 'frisee', 'frisée'
+    set_ingredient 'red pepper', 'red(-|\s)(bell)?\s?peppers?'
+    set_ingredient 'green pepper', 'green(-|\s)(bell)?\s?peppers?'
+    set_ingredient 'bell pepper', 'bell(-|\s)?peppers?'
+
+    set_ingredient 'scallion', 'scallions'
+    set_ingredient 'vegetables'
+
+
     set_ingredient 'abalone'
     set_ingredient 'absinthe'
     set_ingredient 'achar'
@@ -75,8 +284,7 @@ module Onigiri
     set_ingredient 'amla'
     set_ingredient 'ammonium bicarbonate'
     set_ingredient 'anchovette'
-    set_ingredient 'anchovie', 'anchovies?'
-    set_ingredient 'anchovy paste'
+    
     set_ingredient 'andouille sausage'
     set_ingredient 'angelica'
     set_ingredient 'anise'
@@ -128,7 +336,7 @@ module Onigiri
     set_ingredient 'barberry', 'barberries'
     set_ingredient 'bard'
     set_ingredient 'barley'
-    set_ingredient 'barley sugar'
+    
     set_ingredient 'baron'
     set_ingredient 'basil'
     set_ingredient 'basket cheese'
@@ -159,7 +367,7 @@ module Onigiri
     set_ingredient 'black kale'
     set_ingredient 'black olive', 'black(-|\s)?olives?'
     set_ingredient 'black pepper', 'black-?pepp?er'
-    set_ingredient 'blackeyed pea', 'blackeyed peas', 'black eyed pea', 'blackey ed peas'
+    
     set_ingredient 'blackberry', 'blackberries'
     set_ingredient 'blanch'
     set_ingredient 'blue cheese'
@@ -188,9 +396,8 @@ module Onigiri
     set_ingredient 'broccoli'
     set_ingredient 'broccoli raab'
     set_ingredient 'broil'
-    set_ingredient 'broth'
     set_ingredient 'brown rice'
-    set_ingredient 'brown sugar'
+    
     set_ingredient 'brunoise'
     set_ingredient 'bruschetta'
     set_ingredient 'brussels sprouts', 'brussels sprouts?'
@@ -200,7 +407,7 @@ module Onigiri
     set_ingredient 'buerre manie'
     set_ingredient 'bulgur wheat'
     set_ingredient 'bundt pan'
-    set_ingredient 'butter'
+    
     set_ingredient 'buttermilk'
     set_ingredient 'butternut squash'
     set_ingredient 'cabbage'
@@ -215,7 +422,6 @@ module Onigiri
     set_ingredient 'candy making temperatures'
     set_ingredient 'candy thermometer', 'candy thermometers?'
     set_ingredient 'cannellini bean', 'cannellini beans'
-    set_ingredient 'canola oil'
     set_ingredient 'cantaloupe', 'cantaloupes?'
     set_ingredient 'cape gooseberry', 'cape gooseberries'
     set_ingredient 'caper', 'capers?'
@@ -229,7 +435,7 @@ module Onigiri
     set_ingredient 'carob'
     set_ingredient 'carrageen'
     set_ingredient 'carrot', 'carrots?'
-    set_ingredient 'cashew nut'
+    
     set_ingredient 'cassava'
     set_ingredient 'casserole'
     set_ingredient 'catfish'
@@ -246,7 +452,6 @@ module Onigiri
     set_ingredient 'chard'
     set_ingredient 'chaurice sausage'
     set_ingredient 'chayote'
-    set_ingredient 'cheddar cheese'
     set_ingredient 'cheese'
     set_ingredient 'cheesecloth'
     set_ingredient 'chendol'
@@ -267,7 +472,7 @@ module Onigiri
     set_ingredient 'chinese date', 'chinese dates?'
     set_ingredient 'chipotle peppers'
     set_ingredient 'chive', 'chives?'
-    set_ingredient 'chocolate'
+    
     set_ingredient 'chowder'
     set_ingredient 'chutney'
     set_ingredient 'cider'
@@ -294,7 +499,6 @@ module Onigiri
     set_ingredient 'copha'
     set_ingredient 'coriander'
     set_ingredient 'corn'
-    set_ingredient 'corn flour'
     set_ingredient 'corn syrup'
     set_ingredient 'corned beef'
     set_ingredient 'cornichon', 'cornichons?'
@@ -330,7 +534,7 @@ module Onigiri
     set_ingredient 'crystallized ginger'
     set_ingredient 'cucumber', 'cucumbers'
     set_ingredient 'cucuzza'
-    set_ingredient 'cumin'
+    
     set_ingredient 'curacao'
     set_ingredient 'currant', 'currants'
     set_ingredient 'curry leaf', 'curry leaves'
@@ -339,7 +543,7 @@ module Onigiri
     set_ingredient 'custard'
     set_ingredient 'dashi'
     set_ingredient 'date', 'dates'
-    set_ingredient 'date sugar'
+    
     set_ingredient 'derby cheese'
     set_ingredient 'dhania-jeera powder'
     set_ingredient 'dice'
@@ -361,7 +565,7 @@ module Onigiri
     set_ingredient 'egg substitute', 'egg substitutes'
     set_ingredient 'eggplant', 'eggplants'
     set_ingredient 'elderberry', 'elderberries'
-    set_ingredient 'endive'
+    
     set_ingredient 'english muffin', 'english muffins'
     set_ingredient 'english mustard'
     set_ingredient 'epazote'
@@ -378,7 +582,6 @@ module Onigiri
     set_ingredient 'fennel seed', 'fennel seeds'
     set_ingredient 'fenugreek'
     set_ingredient 'fermented black bean', 'fermented black beans'
-    set_ingredient 'feta cheese'
     set_ingredient 'figs'
     set_ingredient 'file powder'
     set_ingredient 'finnan haddie'
@@ -423,7 +626,6 @@ module Onigiri
     set_ingredient 'gorgonzola'
     set_ingredient 'gouda'
     set_ingredient 'graham cracker', 'graham crackers'
-    set_ingredient 'gram flour'
     set_ingredient 'grand marnier'
     set_ingredient 'granola'
     set_ingredient 'grape', 'grapes'
@@ -435,7 +637,6 @@ module Onigiri
     set_ingredient 'greens'
     set_ingredient 'grits'
     set_ingredient 'grouper'
-    set_ingredient 'gruyere'
     set_ingredient 'guanbana'
     set_ingredient 'guava', 'guavas'
     set_ingredient 'gumbo'
@@ -468,16 +669,15 @@ module Onigiri
     set_ingredient 'hyssop'
     set_ingredient 'ice cream'
     set_ingredient 'ice wine'
-    set_ingredient 'icing sugar'
+    
     set_ingredient 'indian pudding'
     set_ingredient 'instant espresso'
     set_ingredient 'instant potato flakes'
-    set_ingredient 'invert sugar'
+    
     set_ingredient 'irish coffee'
     set_ingredient 'irish cream liqueur'
     set_ingredient 'irish mist'
     set_ingredient 'isinglass'
-    set_ingredient 'jack cheese'
     set_ingredient 'jaggery'
     set_ingredient 'jambalaya'
     set_ingredient 'jamon serrano'
@@ -524,17 +724,11 @@ module Onigiri
     set_ingredient 'lecithin'
     set_ingredient 'leek', 'leeks'
     set_ingredient 'lefse'
-    set_ingredient 'lemon', 'lemons'
-    set_ingredient 'lemon balm'
-    set_ingredient 'lemon grass'
-    set_ingredient 'lemon juice'
-    set_ingredient 'lemon peel'
     set_ingredient 'lentil', 'lentils'
     set_ingredient 'lettuce'
     set_ingredient 'liaison'
     set_ingredient 'light cream'
     set_ingredient 'lima bean', 'lima beans'
-    set_ingredient 'limes'
     set_ingredient 'lingcod'
     set_ingredient 'litchi'
     set_ingredient 'liver'
@@ -552,12 +746,11 @@ module Onigiri
     set_ingredient 'mahleb'
     set_ingredient 'malt vinegar'
     set_ingredient 'malta'
-    set_ingredient 'mandarin orange', 'mandarin oranges'
     set_ingredient 'mange-tout', 'mange tout'
     set_ingredient 'mango', 'mangoes'
     set_ingredient 'mangosteen'
     set_ingredient 'manzanilla olive', 'manzanilla olives'
-    set_ingredient 'maple syrup'
+    
     set_ingredient 'maraschino cherry', 'maraschino cherries'
     set_ingredient 'margarine'
     set_ingredient 'marjoram'
@@ -571,12 +764,12 @@ module Onigiri
     set_ingredient 'mascarpone'
     set_ingredient 'matignon'
     set_ingredient 'matzo meal'
-    set_ingredient 'mayonnaise'
+    
     set_ingredient 'melons'
     set_ingredient 'meringue powder'
     set_ingredient 'mesclun'
     set_ingredient 'mettwurst', 'mettwursts'
-    set_ingredient 'milk'
+    
     set_ingredient 'mimolette cheese'
     set_ingredient 'mince'
     set_ingredient 'mint'
@@ -598,7 +791,7 @@ module Onigiri
     set_ingredient 'mugwort'
     set_ingredient 'mung bean', 'mung beans'
     set_ingredient 'muscadine grape'
-    set_ingredient 'muscovado sugar'
+    
     set_ingredient 'muscovy duck'
     set_ingredient 'mushroom', 'mushrooms'
     set_ingredient 'muskmelon','muskmelons'
@@ -614,17 +807,15 @@ module Onigiri
     set_ingredient 'offal'
     set_ingredient 'okra'
     set_ingredient 'olive', 'olives'
-    set_ingredient 'olive oil'
+    
     set_ingredient 'onion', 'onions?'
     set_ingredient 'onion powder'
-    set_ingredient 'oranges'
-    set_ingredient 'orange flower water'
-    set_ingredient 'orange peel'
     set_ingredient 'oregano'
     set_ingredient 'orgeat syrup'
     set_ingredient 'oyster sauce'
     set_ingredient 'palm oil'
-    set_ingredient 'palm sugar'
+    
+    set_ingredient 'pancake syrup'
     set_ingredient 'pancetta'
     set_ingredient 'panir'
     set_ingredient 'panko'
@@ -633,7 +824,6 @@ module Onigiri
     set_ingredient 'paprika'
     set_ingredient 'parboil'
     set_ingredient 'parchment paper'
-    set_ingredient 'parmesan'
     set_ingredient 'parsley'
     set_ingredient 'parsnip', 'parsnips'
     set_ingredient 'passion fruit'
@@ -659,7 +849,7 @@ module Onigiri
     set_ingredient 'phyllo dough'
     set_ingredient 'pickle', 'pickles'
     set_ingredient 'pickling lime'
-    set_ingredient 'pico de gallo'
+    
     set_ingredient 'pie melon'
     set_ingredient 'pierogies'
     set_ingredient "pig's cheek", "pig'?s cheek"
@@ -706,11 +896,11 @@ module Onigiri
     set_ingredient 'provolone'
     set_ingredient 'prune', 'prunes'
     set_ingredient 'pudding mix', 'pudding mixes'
-    set_ingredient 'puff pastry','puff pastries'
+    
     set_ingredient 'pulses'
     set_ingredient 'pumpkin', 'pumpkins'
     set_ingredient 'pumpkin pie spice'
-    set_ingredient 'pumpkin seed', 'pumpkin seeds'
+    
     set_ingredient 'quail'
     set_ingredient 'quark'
     set_ingredient 'quenelle', 'quenelles'
@@ -735,7 +925,6 @@ module Onigiri
     set_ingredient 'red cabbage'
     set_ingredient 'red chile powder'
     set_ingredient 'red leicester'
-    set_ingredient 'red pepper flake', 'red pepper flake'
     set_ingredient 'red snapper'
     set_ingredient 'remoulade'
     set_ingredient 'rhubarb'
@@ -746,7 +935,7 @@ module Onigiri
     set_ingredient 'rice vermicelli'
     set_ingredient 'rice vinegar'
     set_ingredient 'rice wine', 'rice wines'
-    set_ingredient 'ricotta cheese'
+    
     set_ingredient 'romaine lettuce'
     set_ingredient 'romano cheese'
     set_ingredient 'rookworst'
@@ -765,8 +954,6 @@ module Onigiri
     set_ingredient 'salmon'
     set_ingredient 'salsa'
     set_ingredient 'salsify'
-    set_ingredient 'salt'
-    set_ingredient 'salt and pepper'
     set_ingredient 'salt pork'
     set_ingredient 'sambal'
     set_ingredient 'sand dab'
@@ -845,7 +1032,7 @@ module Onigiri
     set_ingredient 'sucanat'
     set_ingredient 'succotash'
     set_ingredient 'suet'
-    set_ingredient 'sugar'
+    
     set_ingredient 'sultana'
     set_ingredient 'sumac'
     set_ingredient 'summer squash'
@@ -927,12 +1114,12 @@ module Onigiri
     set_ingredient 'wheat germ'
     set_ingredient 'whelk', 'whelks'
     set_ingredient 'white bean', 'white beans'
-    set_ingredient 'white chocolate'
+    
     set_ingredient 'wild rice'
     set_ingredient 'wine'
-    set_ingredient 'wine vinegar'
+    
     set_ingredient 'woodruff'
-    set_ingredient 'worcestershire sauce'
+    set_ingredient 'worcestershire sauce', 'worcestershire'
     set_ingredient 'yeast'
     set_ingredient 'yogurt'
     set_ingredient 'zucchini', 'zucchinis'
