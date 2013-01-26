@@ -67,7 +67,8 @@ class TestNumerizer < MiniTest::Unit::TestCase
       ["2 - 3", "2"],
       ["2 or 3", "2"],
       ["two or three", "2"],
-      ["two to three", "2"]
+      ["two to three", "2"],
+      ["0.25 to 0.5", "0.25"]
     ]
 
     ranges.each do |range, choosen|
