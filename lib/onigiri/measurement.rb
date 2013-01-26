@@ -48,7 +48,9 @@ module Onigiri
     set_measurement "tablespoon", "tbsp", "T", "tablespoon", "tablespoons"
     set_measurement "teaspoon", "tsp", "t", "teaspoon", "teaspoons"
     set_measurement '15 ounce can', '15-?ounce cans?'
-    set_measurement "9 ounce can", '9-?ounce cans?'
+    set_measurement '9 ounce can', '9-?ounce cans?'
+    set_measurement 'can', 'cans', 'tin', 'tins'
+    set_measurement 'jar', 'jars'
     # metric units
     set_measurement "gram", "g", "g.", "gr", "gr.", "gram", "grams"
     set_measurement "kilogram", "kg", "kilogram", "kilograms"
@@ -59,6 +61,8 @@ module Onigiri
     # random units for veg n stuff
     set_measurement "clove", "cloves"
     set_measurement "head"
+
+    set_measurement "slice", "slice"
 
     set_measurement "medium", 'med\.?'
     set_measurement "large", 'lrg\.?'
