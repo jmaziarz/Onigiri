@@ -1,7 +1,7 @@
 module Onigiri
   class Onigiri
     class << self
-      def parse(text)
+      def parse(text, options={})
         normalized_text = normalize(text)
 
         tokens = tokenize(normalized_text)
@@ -12,25 +12,31 @@ module Onigiri
 
         tokens = select_tagged_only(tokens) 
 
-        if ::Onigiri.debug
-          puts "\n+---------------------------------------------------"
-          puts "text: #{text}"
-          puts "norm: #{normalized_text}"
-          tokens.map{|t| puts t.to_s}
-          puts "+---------------------------------------------------\n"
-        end
-        matchset = nil
-        templates[:exact_match].each do |template|
-          return matchset.result if (matchset = template.match tokens)
-        end
-  
-        templates[:broad_match].each do |template|
-          return matchset.result if (matchset = template.nonstrict_match tokens)
+        matchset = match_to_template(tokens)
+
+        if matchset
+          result = matchset.result
+          if options[:debug] == true
+            result[:debug] = {}
+            result[:debug][:text] = text
+            result[:debug][:normalized_text] = normalized_text
+            result[:debug][:tagged_tokens]   = tag_combinations_for(tokens)
+          end
         end
 
-        if ::Onigiri.log_failures
-          Logger.no_ingredient_found(text) unless tokens.find{|x| x.has_tag?(Ingredient) }
-          Logger.no_pattern_match(tokens, text) 
+        return result if result
+        return nil
+      end
+
+      def match_to_template(tokens)
+        matchset = nil
+        templates[:exact_match].each do |template|
+          return matchset if (matchset = template.match tokens)
+        end
+        
+        
+        templates[:broad_match].each do |template|
+          return matchset if (matchset = template.nonstrict_match tokens)
         end
 
         return nil
@@ -78,41 +84,11 @@ module Onigiri
         text.gsub!(/(\d+\.?\d*?)\s+whole/, '\1') #remove useage of 'whole' but only after a number/decimal 
         text
       end
-    end
-  end
 
-  #for intenal error reporting
-  class OnigiriPain < Exception #:nodoc:
-  end 
-
-  class Logger
-    class << self
-      def redis
-        @redis
-      end
-
-      def redis=(redis)
-        @redis = redis
-      end
-
-      def reset
-        redis.flushall
-      end
-
-      #store strings which dont have matched ingredeint (store string with all matched tags removed?)
-      def no_ingredient_found(string)
-        redis.lpush 'ingredient_errors', string
-      end
-  
-      #store token signatures which dont have a corresponding pattern. 
-      def no_pattern_match(tokens, string)
-        combinations = tag_combinations_for(tokens)
-        combinations.each do |combo|
-          redis.sadd(combo, string)
-          redis.zadd('pattern_count', redis.scard(combo).to_s, combo)
-        end
-      end
-
+      #for debugging
+      #given a token can be tagged mutliple times
+      #this method works out all the possible combinations 
+      #of tags a set of tagged tokens can produce. 
       def tag_combinations_for(tokens)
         tags = tokens.map{|t| t.tags.map(&:klass_name) }
         head, *rest = tags
@@ -120,20 +96,10 @@ module Onigiri
         combinations = head.product *rest
         combinations.map{|x| x.join(" ")}
       end
-
-      def report_ingredient_failures
-        redis.lrange('ingredient_errors', 0, -1).join("\n")
-      end
-
-      def report_pattern_failures
-        str = "===========\nPattern failures\n============\n"
-        redis.zrevrange('pattern_count', 0, -1).each do |pattern|
-          puts "#{redis.zscore('pattern_count', pattern)} - #{pattern}"
-          puts "-------------------------------------"
-          redis.smembers(pattern).each {|x| puts x }
-          puts "\n"
-        end
-      end
     end
   end
+
+  #for intenal error reporting
+  class OnigiriPain < Exception #:nodoc:
+  end 
 end

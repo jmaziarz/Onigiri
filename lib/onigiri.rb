@@ -15,10 +15,5 @@ require 'redis/namespace'
 
 require 'pry'
 module Onigiri
-  class << self
-    attr_accessor :debug, :log_failures
-  end
-  
-  self.debug = true
-  self.log_failures = true #log failed parsings to improve the gem
+
 end
