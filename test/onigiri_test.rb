@@ -1,3 +1,4 @@
+# encoding: UTF-8 
 require 'helper'
 
 class TestOnigiri < MiniTest::Unit::TestCase
@@ -47,6 +48,18 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal result('carrot', 0.5, 'cup'),  Onigiri::Onigiri.parse(text)
   end
 
+  def test_tricky_strings
+    tricky_strings = [["3 ounces (85 grams) semisweet or good white chocolate*, coarsely chopped", result('white chocolate', 3.0, 'ounce', 'chopped')],
+                      ["1/4 to 1/2 cup maple syrup", result('maple syrup', 0.25, 'cup')],
+                      ["1/4 cup olive oil", result('olive oil', 0.25, 'cup')],
+                      ["1 1/2 cups packed (285 grams) dark-brown sugar", result('dark-brown sugar', 1.5, 'cup')],
+                      ['1 cup stock (your choice; Julia recommends beef) or cream (I used stock; it doesn’t *need* cream)', result('stock', 1.0, 'cup')]
+                    ]
+    tricky_strings.each do |string, expected_result|
+      assert_equal expected_result, Onigiri::Onigiri.parse(string), string
+    end
+  end
+
   def test_calculates_all_tag_combinations_for_debugging
     tok_a = Onigiri::Token.new("a")
     tok_b = Onigiri::Token.new("b")
@@ -64,6 +77,13 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal ["ScalarMeasurement Modifier", "Ingredient Modifier"], Onigiri::Onigiri.tag_combinations_for(tokens)
   end
 
+  #items to test
+  #1/4 to 1/3 cup (60 to 80 ml) maple syrup (less for less sweetness, of course)
+  #1/4 cup olive oil => why is it extracting only oil and not olive oil 
+  #1.0 - large -  - clove <==> 1 large clove garlic, thinly sliced => confusing clove spice with measurment clove
+  #1/2 teaspoon red pepper flakes, or more or less to taste => keeps matching red pepper and not flakes
+  #Juice of one lemon => get juice of extracted as modifier
+  #5 to 6 cups low-sodium chicken or vegetable broth => should extract "chicken or vegetable borth" and not "chicken"
   def result(ingredient, ammount="", measurement="", modifier="")
      result = {  :ammount => ammount, 
                  :ingredient => ingredient,
