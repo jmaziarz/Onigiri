@@ -29,6 +29,7 @@ module Onigiri
         ingredients.each do |correct_form, variations|
           variations.each do |v|
             normalized.gsub!(/\b#{v}\b/, correct_form.gsub(" ", "_"))
+            normalized.gsub!(/\b#{v}\b/i, correct_form.gsub(" ", "_"))
           end
         end
         normalized
