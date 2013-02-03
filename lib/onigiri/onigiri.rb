@@ -44,12 +44,12 @@ module Onigiri
 
       def templates
         @templates ||=
-        {:exact_match =>[Template.new([:modifier, :ingredient]), 
+        {:exact_match =>[Template.new([:modifier, :scalar?, :ingredient]), 
                          Template.new([:ingredient, :ingredient?, :ingredient?]), #Cheese Slices, Avocado, Red Onion Slices
                          Template.new([:ingredient, :modifier]), #turkey sliced
                          Template.new([:measurement, :ingredient]), #small basil leaves
                          Template.new([:scalar, :modifier?, :ingredient]),
-                         Template.new([:scalar, :ingredient, :modifier]),
+                         Template.new([:scalar, :ingredient, :modifier?, :measurement]),
                          Template.new([:scalar_measurement, :measurement, :modifier?, :modifier?, :ingredient, :modifier?, :modifier?])],
          
          :broad_match =>[Template.new([:scalar_measurement, :measurement, :modifier, :ingredient]),
@@ -57,7 +57,8 @@ module Onigiri
                          Template.new([:scalar, :modifier, :ingredient]),
                          Template.new([:scalar, :ingredient]),
                          Template.new([:modifier, :ingredient]),
-                         Template.new([:ingredient, :modifier, :scalar])]}
+                         Template.new([:ingredient, :modifier, :scalar]),
+                         Template.new([:ingredient])]}
       end
 
       def taggers
