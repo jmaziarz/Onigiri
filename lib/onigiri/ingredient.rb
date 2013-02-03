@@ -36,7 +36,6 @@ module Onigiri
 
       def set_ingredient(correct_form, *variations)
         @ingredients ||={}
-        dasherized_form = correct_form.gsub(" ", "_") #dasherize multiword ingredients to prevent dicing by their spaces into multiple tokens later on.
         @ingredients[correct_form] = variations
         @ingredients[correct_form].push correct_form #and remember to add dasherized_form to variations for use in token scanning later
       end
