@@ -1,3 +1,4 @@
+# encoding: UTF-8 
 module Onigiri
   class Onigiri
     class << self
@@ -14,18 +15,23 @@ module Onigiri
 
         matchset = match_to_template(tokens)
 
+        
+        result = {}
         if matchset
           result = matchset.result
-          if options[:debug] == true
-            result[:debug] = {}
-            result[:debug][:text] = text
-            result[:debug][:normalized_text] = normalized_text
-            result[:debug][:tagged_tokens]   = tag_combinations_for(tokens)
-          end
+          result[:status] = :success
+        else
+          result[:status] = :failed
         end
 
-        return result if result
-        return nil
+        if options[:debug] == true
+          result ||= {}
+          result[:debug] = {}
+          result[:debug][:text] = text
+          result[:debug][:normalized_text] = normalized_text
+          result[:debug][:tagged_tokens]   = tag_combinations_for(tokens)
+        end
+        result
       end
 
       def match_to_template(tokens)
