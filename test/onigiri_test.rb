@@ -84,11 +84,12 @@ class TestOnigiri < MiniTest::Unit::TestCase
   #1/2 teaspoon red pepper flakes, or more or less to taste => keeps matching red pepper and not flakes
   #Juice of one lemon => get juice of extracted as modifier
   #5 to 6 cups low-sodium chicken or vegetable broth => should extract "chicken or vegetable borth" and not "chicken"
-  def result(ingredient, ammount="", measurement="", modifier="")
+  def result(ingredient, ammount="", measurement="", modifier="", status=:success)
      result = {  :ammount => ammount, 
                  :ingredient => ingredient,
                  :measurement => measurement, 
-                 :modifier => modifier 
+                 :modifier => modifier, 
+                 :status   => status
                }
   end
 end
