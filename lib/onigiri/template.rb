@@ -97,17 +97,17 @@ module Onigiri
 
     def parse_ingredient
       tags = get_tags(Ingredient)
-      tags.map{|i| i.type }.join(", ") if tags
+      tags ? tags.map{|i| i.type }.join(", ") : ""
     end
 
     def parse_modifier
       tags = get_tags(Modifier)
-      tags.map{|i| i.type }.join(", ") if tags
+      tags ? tags.map{|i| i.type }.join(", ") : ""
     end
 
     def parse_measurement
       tag = get_tag(Measurement)
-      tag.type if tag
+      tag ? tag.type : ""
     end
 
     def parse_ammount
