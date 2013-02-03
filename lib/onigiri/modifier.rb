@@ -33,6 +33,7 @@ module Onigiri
       end
     end
 
+    set_modifier 'beaten'
     set_modifier 'boiled'
     set_modifier 'crushed'
     set_modifier 'chopped'
@@ -57,6 +58,8 @@ module Onigiri
     set_modifier 'peeled'
     set_modifier 'ripe'
     set_modifier 'salted'
+    set_modifier 'seeded'
+    set_modifier 'separated'
     set_modifier 'sliced'
     set_modifier 'shredded', 'shredd?ed'
     set_modifier 'squeezed'
@@ -67,5 +70,6 @@ module Onigiri
     set_modifier 'unsalted'
     set_modifier 'warmed'
     set_modifier 'wedges'
+    set_modifier 'zest', 'zest of'
   end
 end
