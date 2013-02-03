@@ -51,6 +51,7 @@ module Onigiri
     set_measurement '9 ounce can', '9-?ounce cans?'
     set_measurement 'can', 'cans', 'tin', 'tins'
     set_measurement 'jar', 'jars'
+    set_measurement '12 ounce jar', '12-?ounce jars?'
     # metric units
     set_measurement "gram", "g", "g.", "gr", "gr.", "gram", "grams"
     set_measurement "kilogram", "kg", "kilogram", "kilograms"
@@ -61,6 +62,12 @@ module Onigiri
     # random units for veg n stuff
     set_measurement "clove", "cloves"
     set_measurement "head"
+
+    set_measurement 'bar', 'bars'
+    set_measurement 'box', 'boxes'
+    set_measurement 'cube', 'cubes'
+
+
 
     set_measurement "slice", "slice"
 
