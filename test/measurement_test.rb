@@ -7,7 +7,9 @@ class TestMeasurement < MiniTest::Unit::TestCase
       ["c", "cup"],
       ["fluid ounce", "fluid_ounce"],
       ["gal", "gallon"],
-      ["oz", "ounce"]
+      ["oz", "ounce"],
+      ["15 ounce cans", "15_ounce_can"]
+
     ]
 
     measurement_variations.each do |variation, normalized_form|
