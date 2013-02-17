@@ -82,13 +82,19 @@ module Onigiri
       def normalize(str)
         text = str.dup
         text.downcase!
-        text.gsub!(/[.,;'`’*]/, '') 
-        text.gsub!(/\(.*?\)/, '') #remove brackets and their contents. 
+        text.gsub!(/[,;'"+!*]/, ' ') #replace punctuation with spaces. Double spaces created will be squeezed later.
+        text.gsub!(/[`’]/, '') #remove apostrophes but dont replace with space i.e. pimm's => pimms
+        text.gsub!(/(\D)\.(\D|\z)/, '\1 \2') #remove periods. Do not remove if acting as a decimal point.
+        text = Numerizer.numerize(text)
+        text.gsub!(/[[:space:]]/, ' ') #replace any NBSP spaces
+        text.gsub!(/(\w)-(\w)/i, '\1 \2') #must follow after numerize - replace hypens in hyphenated words with spaces pizza-topping => pizza topping 
+        text.gsub!(/\(.*?\)/, '') #delete brackets and their contents. 
+        text.strip! 
+        text.squeeze!(" ") #remove double spaces 
         text = Measurement.normalize(text)
         text = Ingredient.normalize(text)
         text = Modifier.normalize(text)
-        text = Numerizer.numerize(text)
-        text.gsub!(/(\d+\.?\d*?)\s+whole/, '\1') #remove useage of 'whole' but only after a number/decimal 
+        text.gsub!(/(\d+\.?\d*?)\s+whole/, '\1') #must follower after numerize - remove useage of 'whole' but only after a number/decimal 
         text
       end
 
