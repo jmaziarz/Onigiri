@@ -1,6 +1,40 @@
 # encoding: UTF-8 
 module Onigiri
   class Onigiri
+
+    class Result 
+      STATUS_TYPES =[:success, :ambiguous, :failed]
+      attr_accessor :text, :ingredient, :ammount, :measurement, 
+                    :modifier, :status, :normalized_text, :score,
+                    :scanned_tags
+
+      def parsings
+        {:ingredient  => ingredient, 
+         :ammount     => ammount, 
+         :measurement => measurement, 
+         :modifier    => modifier}
+      end
+
+      def success?
+        status == :success
+      end
+
+      def ambiguous?
+        status == :ambiguous
+      end
+
+      def failed?
+        status == :failed
+      end
+
+      def status=(sym)
+        raise ArgumentError, "expected either :failed or :success but got #{sym}" unless STATUS_TYPES.include?(sym)
+        @status = sym
+      end
+
+
+    end
+
     class << self
       def parse(text, options={})
         normalized_text = normalize(text)
@@ -16,20 +50,21 @@ module Onigiri
         matchset = match_to_template(tokens)
 
         
-        result = {}
-        if matchset
-          result = matchset.result
-          result[:status] = :success
-        else
-          result[:status] = :failed
-        end
+        result = Result.new
+        result.text = text
+        result.normalized_text = normalized_text
+        result.scanned_tags = tag_combinations_for(tokens)
 
-        if options[:debug] == true
-          result ||= {}
-          result[:debug] = {}
-          result[:debug][:text] = text
-          result[:debug][:normalized_text] = normalized_text
-          result[:debug][:tagged_tokens]   = tag_combinations_for(tokens)
+        if matchset
+          result.status       = :success
+          result.ingredient   = matchset.parse_ingredient
+          result.measurement  = matchset.parse_measurement
+          result.modifier     = matchset.parse_modifier
+          result.ammount      = matchset.parse_ammount
+        elsif (!matchset and result.scanned_tags.any?)
+          result.status = :ambiguous 
+        else
+          result.status = :failed
         end
         result
       end
