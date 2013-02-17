@@ -53,8 +53,9 @@ module Onigiri
         {:exact_match =>[Template.new([:modifier, :scalar?, :ingredient]), 
                          Template.new([:ingredient, :ingredient?, :ingredient?]), #Cheese Slices, Avocado, Red Onion Slices
                          Template.new([:ingredient, :modifier]), #turkey sliced
-                         Template.new([:measurement, :ingredient]), #small basil leaves
+                         Template.new([:measurement, :ingredient, :modifier?]), #small basil leaves
                          Template.new([:scalar, :modifier?, :ingredient]),
+                         Template.new([:scalar, :ingredient, :modifier?, :modifier?]),
                          Template.new([:scalar, :ingredient, :modifier?, :measurement]),
                          Template.new([:scalar_measurement, :measurement, :modifier?, :modifier?, :ingredient, :modifier?, :modifier?])],
          
