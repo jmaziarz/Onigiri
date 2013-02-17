@@ -47,8 +47,13 @@ module Onigiri
     set_measurement "quart", "qt", "qts", "quart", "quarts"
     set_measurement "tablespoon", "tbsp", "T", "tablespoon", "tablespoons"
     set_measurement "teaspoon", "tsp", "t", "teaspoon", "teaspoons"
-    set_measurement '15 ounce can', '15-?ounce cans?'
-    set_measurement '9 ounce can', '9-?ounce cans?'
+    
+    set_measurement '9 ounce can',  '9-ounce cans?', '9 ounce cans?'
+    set_measurement '15 ounce can', '15-ounce cans?', '15 ounce cans?'
+    set_measurement '21 ounce can', '21-ounce cans?', '21 ounce cans?'
+
+    set_measurement '10 ounce bag', '10-ounce bags?', '10 ounce bags?'
+    
     set_measurement 'can', 'cans', 'tin', 'tins'
     set_measurement 'jar', 'jars'
     set_measurement '12 ounce jar', '12-?ounce jars?'
@@ -60,8 +65,12 @@ module Onigiri
     set_measurement "milliliter", "ml", "ml.", "milliliter", "milliliters"
 
     # random units for veg n stuff
-    set_measurement "clove", "cloves"
+    set_measurement "clove", "cloves? of garlic", "garlic cloves?"
     set_measurement "head"
+    set_measurement "handfull", "handfull?s?"
+    
+    set_measurement 'spring', 'sprigs?'
+    set_measurement 'leaf',   'leafs?', 'leaves'
 
     set_measurement 'bar', 'bars'
     set_measurement 'box', 'boxes'
@@ -69,7 +78,8 @@ module Onigiri
 
 
 
-    set_measurement "slice", "slice"
+    set_measurement "slice", "slices?"
+    set_measurement "strip", "strips?"
 
     set_measurement "medium", 'med\.?'
     set_measurement "large", 'lrg\.?'
