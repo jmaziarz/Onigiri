@@ -15,6 +15,7 @@ module Onigiri
       end
 
       def scan_for_measurement(token, next_token)
+        return unless next_token
         if (token.name =~ /^\d+\.?\d*?$/ && Measurement.normalized_measurements.include?(next_token.name))
           token.add_tag ScalarMeasurement.new(token.name.to_f)
         end
