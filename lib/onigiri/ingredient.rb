@@ -11,13 +11,12 @@ module Onigiri
       end
 
       def scan_for_ingredient(token)
-        ingredients.each do |correct_form, variations|
-          variations.each do |var|
-            if token.name.gsub("_", " ") =~ /^#{var}$/
-              token.add_tag new(correct_form)
-              return
-            end
-          end
+        word_size = token.name.split("_").size
+
+        humanized_token_name = token.name.gsub("_", " ")
+        if correct_forms.include? humanized_token_name
+          token.add_tag new(humanized_token_name)
+          return
         end
       end
 
@@ -26,9 +25,10 @@ module Onigiri
       # This prevents such an ingredient being spliced into multiple tokens 
       def normalize(text)
         normalized = text
-        ingredients.each do |correct_form, variations|
-          variations.each do |v|
-            normalized.gsub!(/\b#{v}\b/i, correct_form.gsub(" ", "_"))
+        word_counts = ingredients.keys.sort.reverse
+        word_counts.each do |word_count|
+          ingredients[word_count].each do |variation, correct_form|
+            normalized.gsub!(/\b#{variation}\b/i, correct_form.gsub(" ", "_"))
           end
         end
         normalized
@@ -36,8 +36,20 @@ module Onigiri
 
       def set_ingredient(correct_form, *variations)
         @ingredients ||={}
-        @ingredients[correct_form] = variations
-        @ingredients[correct_form].push correct_form #and remember to add dasherized_form to variations for use in token scanning later
+        variations.each do |v|
+        set_by_word_count(v, correct_form)
+        end
+        set_by_word_count(correct_form, correct_form)
+      end
+
+      def set_by_word_count(variation, correct_form)
+        word_count = variation.split(" ").size
+        @ingredients[word_count] ||= {}
+        @ingredients[word_count][variation] = correct_form
+      end
+
+      def correct_forms
+        @correct_forms ||= @ingredients.values.map(&:values).flatten
       end
     end
 
