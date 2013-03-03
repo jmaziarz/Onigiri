@@ -49,7 +49,7 @@ module Onigiri
       end
 
       def correct_forms
-        @correct_forms ||= @ingredients.values.map(&:values).flatten
+        @correct_forms ||= @ingredients.values.map(&:values).flatten.uniq
       end
     end
 
