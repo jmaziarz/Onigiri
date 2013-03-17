@@ -788,7 +788,6 @@ module Onigiri
     set_ingredient 'creme fraiche'
     set_ingredient 'cremini mushroom', 'cremini mushrooms?'
     set_ingredient 'creole sausage'
-    set_ingredient 'crock pot'
     set_ingredient 'crostini'
     set_ingredient 'crouton', 'croutons'
     set_ingredient 'crozzled'
