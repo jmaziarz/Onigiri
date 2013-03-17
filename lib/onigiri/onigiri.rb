@@ -9,10 +9,10 @@ module Onigiri
                     :scanned_tags
 
       def parsings
-        {:ingredient  => ingredient, 
-         :ammount     => ammount, 
-         :measurement => measurement, 
-         :modifier    => modifier}
+          {:ingredient  => ingredient, 
+           :ammount     => ammount, 
+           :measurement => measurement, 
+           :modifier    => modifier}    
       end
 
       def success?
@@ -49,7 +49,7 @@ module Onigiri
 
         matchset = match_to_template(tokens)
 
-        
+        # binding.pry        
         result = Result.new
         result.text = text
         result.normalized_text = normalized_text

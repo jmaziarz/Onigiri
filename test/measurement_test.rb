@@ -5,11 +5,10 @@ class TestMeasurement < MiniTest::Unit::TestCase
   def test_normalizes_measurements
     measurement_variations = [
       ["c", "cup"],
-      ["fluid ounce", "fluid_ounce"],
-      ["gal", "gallon"],
-      ["oz", "ounce"],
-      ["15 ounce cans", "15_ounce_can"]
-
+      ["fluid ounce", "fl_oz"],
+      ["gallon", "gal"],
+      ["ounce", "oz"],
+      ["15 ounce cans", "15_oz_can"]
     ]
 
     measurement_variations.each do |variation, normalized_form|
@@ -17,9 +16,13 @@ class TestMeasurement < MiniTest::Unit::TestCase
     end
   end
 
+  def test_does_not_make_partial_matches_when_normalizing
+    assert_equal "12_oz_jar", Onigiri::Measurement.normalize("12-ounce jar")
+  end
+
   def test_scan_for_measurements_tags_token_with_name
-    token = Onigiri::Token.new("fluid_ounce")
+    token = Onigiri::Token.new("fl_oz")
     Onigiri::Measurement.scan_for_measurement(token)
-    assert_equal "fluid ounce", token.tags.first.type
+    assert_equal "fl oz", token.tags.first.type
   end
 end

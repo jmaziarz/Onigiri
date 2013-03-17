@@ -35,15 +35,15 @@ class TestOnigiri < MiniTest::Unit::TestCase
 
   def test_parsing_from_text_sclmsr_msr_ing
     result = Onigiri::Onigiri.parse("10 lbs of cherry tomato")
-    assert_equal result_hash('cherry tomato', 10.0, 'pound', ''), result.parsings
+    assert_equal result_hash('cherry tomato', 10.0, 'lb', ''), result.parsings
   end
 
   def test_parsing_from_text_including_ingredient_variation
-    assert_equal(result_hash('dijon mustard', 1, 'tablespoon'), Onigiri::Onigiri.parse("1 tbsp Dijjon mustard").parsings)
+    assert_equal(result_hash('dijon mustard', 1, 'tbsp'), Onigiri::Onigiri.parse("1 tbsp Dijjon mustard").parsings)
   end
 
   def test_parsing_sclmsr_msr_ing
-    assert_equal result_hash('honey', 1.5, 'tablespoon'), Onigiri::Onigiri.parse("1 1/2 tbsp honey").parsings
+    assert_equal result_hash('honey', 1.5, 'tbsp'), Onigiri::Onigiri.parse("1 1/2 tbsp honey").parsings
   end
 
   def test_parsing_multiple_ingredients
@@ -51,18 +51,26 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal result_hash('carrot', 0.5, 'cup', ''), r.parsings
   end
 
+  def test_this
+    str = "1 12-ounce jar crunchy peanut butter"
+    exp = result_hash('peanut butter', 1.0, '12 oz jar')
+    act = Onigiri::Onigiri.parse(str, :debug => true).parsings
+    assert_equal(exp, act)
+  end
+
+  
   def test_tricky_strings
     tricky_strings = [
-                      ["1 1/2 teaspoons pure vanilla extract ", result_hash('vanilla extract', 1.5, 'teaspoon', '')],
-                      ["Zest of 1 large lime ", result_hash('lime', 1.0, 'large', '')],
-                      ["15 ounce can artichoke hearts, chopped", result_hash("artichoke heart", 1.0, '15 ounce can', 'chopped')],
+                      ["1 1/2 teaspoons pure vanilla extract ", result_hash('vanilla extract', 1.5, 'tsp', '')],
+                      ["Zest of 1 large lime ", result_hash('lime', 1.0, 'lrg', '')],
+                      ["15 ounce can artichoke hearts, chopped", result_hash("artichoke heart", 1.0, '15 oz can', 'chopped')],
                       ["4 hamburger buns", result_hash('hamburger bun', 4.0)],
                       ["1-2 jalapeno chiles, seeded, minced", result_hash('jalapeno chile', 1.0, '', 'seeded, minced')],
-                      ["1 12-ounce jar crunchy peanut butter", result_hash('peanut butter', 1.0, '12 ounce jar')],
+                      ["1 12-ounce jar crunchy peanut butter", result_hash('peanut butter', 1.0, '12 oz jar')],
                       ["2 full sized (3.17oz) dark chocolate bars", result_hash('dark chocolate', 2.0, 'bar')],
                       ["zest of one lemon", result_hash('lemon', 1.0, '', 'zest')],
                       ["Oil for greasing the jars", result_hash('oil', 1.0)],
-                      ["3 ounces (85 grams) semisweet or good white chocolate*, coarsely chopped", result_hash('white chocolate', 3.0, 'ounce', 'chopped')],
+                      ["3 ounces (85 grams) semisweet or good white chocolate*, coarsely chopped", result_hash('white chocolate', 3.0, 'oz', 'chopped')],
                       ["1/4 to 1/2 cup maple syrup", result_hash('maple syrup', 0.25, 'cup')],
                       ["1/4 cup olive oil", result_hash('olive oil', 0.25, 'cup')],
                       ["1 1/2 cups packed (285 grams) dark-brown sugar", result_hash('dark-brown sugar', 1.5, 'cup')],
@@ -91,13 +99,6 @@ class TestOnigiri < MiniTest::Unit::TestCase
     assert_equal ["ScalarMeasurement Modifier", "Ingredient Modifier"], Onigiri::Onigiri.tag_combinations_for(tokens)
   end
 
-  #items to test
-  #1/4 to 1/3 cup (60 to 80 ml) maple syrup (less for less sweetness, of course)
-  #1/4 cup olive oil => why is it extracting only oil and not olive oil 
-  #1.0 - large -  - clove <==> 1 large clove garlic, thinly sliced => confusing clove spice with measurment clove
-  #1/2 teaspoon red pepper flakes, or more or less to taste => keeps matching red pepper and not flakes
-  #Juice of one lemon => get juice of extracted as modifier
-  #5 to 6 cups low-sodium chicken or vegetable broth => should extract "chicken or vegetable borth" and not "chicken"
   def result_hash(ingredient, ammount="", measurement="", modifier="")
      result = {  :ammount => ammount, 
                  :ingredient => ingredient,
