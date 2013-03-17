@@ -51,6 +51,19 @@ module Onigiri
       def correct_forms
         @correct_forms ||= @ingredients.values.map(&:values).flatten.uniq
       end
+
+      #whereas Onigiri.parse expects something resembling a line from a recipes ingredient listing,
+      #this will simply return all ingredients present in a string. Useful for searching paras
+      #for mentions of ingredients etc.
+      def extract_ingredients(str)
+        ings = []
+        ingredients.keys.sort.reverse.each do |word_count|
+          ingredients[word_count].each do |variation, correct_form|
+            ings << correct_form if str.gsub!(/\b#{variation}\b/i, '')
+          end
+        end
+        ings.reverse.compact #remove any nils returned by gsub!
+      end
     end
 
     #alcohol & drinks
