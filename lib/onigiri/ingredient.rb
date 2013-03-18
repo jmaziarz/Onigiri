@@ -518,6 +518,7 @@ module Onigiri
         
         #tomatoes
     set_ingredient 'tomato', 'tomatoes'
+    set_ingredient 'cherry tomato', 'cherry tomatoes'
     set_ingredient 'heirloom tomato', 'heirloom tomatoes'
     set_ingredient 'sun dried tomato', 'sun dried tomatoes'
     set_ingredient 'plum tomato', 'plum tomatoes'
