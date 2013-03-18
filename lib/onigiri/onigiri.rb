@@ -123,7 +123,7 @@ module Onigiri
         text.gsub!(/(\D)\.(\D|\z)/, '\1 \2') #remove periods. Do not remove if acting as a decimal point.
         text = Numerizer.numerize(text)
         text.gsub!(/[[:space:]]/, ' ') #replace any NBSP spaces
-        text.gsub!(/(\w)-(\w)/i, '\1 \2') #must follow after numerize - replace hypens in hyphenated words with spaces pizza-topping => pizza topping 
+        text.gsub!(/(\w)-(\w)/i, '\1 \2') #must follow after numerize (numerize converts ranges delimited with hypens like 1-2) - replace hypens in hyphenated words with spaces pizza-topping => pizza topping 
         text.gsub!(/\(.*?\)/, '') #delete brackets and their contents. 
         text.strip! 
         text.squeeze!(" ") #remove double spaces 
