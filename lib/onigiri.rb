@@ -13,7 +13,6 @@ require 'onigiri/modifier'
 require 'redis'
 require 'redis/namespace'
 
-require 'pry'
 module Onigiri
 
 end
