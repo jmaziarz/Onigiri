@@ -28,7 +28,7 @@ module Onigiri
         word_counts = measurements.keys.sort.reverse
         word_counts.each do |word_count|
           measurements[word_count].each do |variation, correct_form|
-            # binding.pry if correct_form == "12 oz jar"
+
             normalized.gsub!(/\b#{variation}\b/i, correct_form.gsub(" ", "_"))
           end
         end
@@ -90,7 +90,7 @@ module Onigiri
     set_measurement "head"
     set_measurement "handfull", "handfull?s?"
     
-    set_measurement 'spring', 'sprigs?'
+    set_measurement 'sprig', 'sprigs?'
     set_measurement 'leaf',   'leafs?', 'leaves'
 
     set_measurement 'bar', 'bars'
@@ -102,8 +102,8 @@ module Onigiri
     set_measurement "slice", "slices?"
     set_measurement "strip", "strips?"
 
-    set_measurement "med", 'med\.?'
-    set_measurement "lrg", 'lrg\.?', 'large'
-    set_measurement "sml", 'sml\.?'
+    set_measurement "medium", 'med\.?'
+    set_measurement "large", 'lrg\.?', 'large'
+    set_measurement "small", 'sml\.?'
   end
 end

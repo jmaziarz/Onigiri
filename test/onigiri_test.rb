@@ -62,7 +62,7 @@ class TestOnigiri < MiniTest::Unit::TestCase
   def test_tricky_strings
     tricky_strings = [
                       ["1 1/2 teaspoons pure vanilla extract ", result_hash('vanilla extract', 1.5, 'tsp', '')],
-                      ["Zest of 1 large lime ", result_hash('lime', 1.0, 'lrg', '')],
+                      ["Zest of 1 large lime ", result_hash('lime', 1.0, 'large', '')],
                       ["15 ounce can artichoke hearts, chopped", result_hash("artichoke heart", 1.0, '15 oz can', 'chopped')],
                       ["4 hamburger buns", result_hash('hamburger bun', 4.0)],
                       ["1-2 jalapeno chiles, seeded, minced", result_hash('jalapeno chile', 1.0, '', 'seeded, minced')],
