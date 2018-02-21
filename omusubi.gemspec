@@ -4,8 +4,8 @@ require File.expand_path('../lib/onigiri/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["robodisco"]
   gem.email         = ["adamsubscribe@googlemail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Heavy Duty Ingredient Parser}
+  gem.summary       = %q{Heavy Duty Ingredient Parser}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
